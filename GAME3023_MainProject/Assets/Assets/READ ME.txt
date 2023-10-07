@@ -5,8 +5,10 @@ Pixel Art Overworld, by Edermunizz - https://edermunizz.itch.io/
 
 ################ CC BY 3.0 ################ 
 Characters -16x18-rpg-characters-hair-clothing-pack, by Charles Gabriel - https://opengameart.org/content/16x18-rpg-characters-hair-clothing-pack
-
+grey grid <a href="http://www.freeimageslive.co.uk/free_stock_image/greytilesjpg" target="_blank"> freeimageslive.co.uk - creator</a> (greytiles as saved on Assets/Images)
 ################ CC0 ################ 
 Items by Henrique Lazarini (7Soul1) - https://opengameart.org/content/496-pixel-art-icons-for-medievalfantasy-rpg 
 World tile set by ArMM1998 - https://opengameart.org/content/zelda-like-tilesets-and-sprites 
 UI by Buch - https://opengameart.org/content/golden-ui
+
+Fonts made on https://fontmeme.com/famous-fonts/
