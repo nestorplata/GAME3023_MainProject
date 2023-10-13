@@ -1,0 +1,2 @@
+0, sting, buzz, hunter, nest
+1, Deals Damage, Increases evasion, increases damage,  increases defense
