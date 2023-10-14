@@ -1,0 +1,4 @@
+0, spit, stick, fortify, shake
+1, deals regular damage, higly reduce enemy evasion, increases damage and defense stats, remove poison 
+2, slime, shake removes fortify but augments evasion  
+3, 20, 20, 20, 20

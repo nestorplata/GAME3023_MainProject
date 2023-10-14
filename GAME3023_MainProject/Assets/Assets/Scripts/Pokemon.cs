@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using static UnityEditor.VersionControl.Asset;
 
 public class Pokemon : MonoBehaviour
@@ -43,6 +44,26 @@ public class Pokemon : MonoBehaviour
         Evasion = 1;
 
 
+    }
+    public int getlife()
+    {
+        return Life;
+    }
+    public string getname()
+    {
+        return Pname;
+    }
+    public string[] getabilities()
+    {
+        return Abilities;
+    }
+    public string[] gettext()
+    {
+        return TextInformation;
+    }
+    public List<string> getstates()
+    {
+        return States;
     }
 
 }

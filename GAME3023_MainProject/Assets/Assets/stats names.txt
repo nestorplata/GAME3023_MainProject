@@ -1,0 +1,67 @@
+stats names
+life
+attack
+defense
+evasion
+states
+
+behaviour Tree
+return right cick
+select left click
+-> "Enemy name" wants to fight
+-> "Enemy name" sent out "Epokemon name"
+-> Go! "APokemon name"
+Fight
+->select ability (full Right appearing Options)
+	()ability one
+	()ability two
+	()return
+	-> "APokemon name" used "Ability name"		
+	->play animations
+		<> decrease health bar
+		<>additional stuff maybe
+	-> "EPokemon name" used "ability name"
+	->play animations
+		<> decrease health bar
+		<>additional stuff maybe
+`	->return
+Item
+->select Item (middle-left list of selectable options)
+	()item one
+	()item two
+	()Return
+	-> "Item Name" used
+
+PKMN
+->select pokemon (middle-left list of selectable options)
+	()pokemon one
+	()pokemon two
+	()Return
+	-> GO! "Apokemon name"
+Run (half Right appearing Options)
+->"are you sure?"
+	()leaves battle
+	()Return
+	->"leaving Battle"
+4 scripts:
+//part 1
+Combat manager: stores all pokemons of Player and enemy.
+A and E Display: display Pokemon, pokemon's names and pokemon's current life
+
+//part 2
+Text display information: shows information based on actions on the combat manager and the selected button
+affect everything else as shown on the bevabiour tree
+
+
+
+
+<> typ1
+distributing pokemon list
+
+
+https://opengameart.org/content/hornet-or-wasp
+https://opengameart.org/content/chain-insect
+https://opengameart.org/content/animated-pixel-slug
+https://opengameart.org/content/dialog-box
+https://opengameart.org/content/ui-button
+https://opengameart.org/content/earwig-top-down

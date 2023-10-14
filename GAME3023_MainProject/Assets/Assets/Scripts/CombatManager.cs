@@ -21,11 +21,13 @@ public class CombatManager : MonoBehaviour
     static string path = ".txt";
     
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         AListOfPokemons = new List<Pokemon>();
         EListOfPokemons = new List<Pokemon>();
         availableFiles = new List<string>();
+        AListOfPokemons = SetPokemonList("Assets\\Save0\\player");
+        EListOfPokemons = SetPokemonList("Assets\\Save0\\enemy");
     }
 
     static public List<Pokemon> SetPokemonList(string folder)
@@ -37,16 +39,16 @@ public class CombatManager : MonoBehaviour
         {
             string[] SPCFolder = Directory.GetFiles(folder);
 
+
             foreach (string file in SPCFolder)
             {
-                availableFiles.Add(file);
-                Debug.Log(file);
+                string[] name = file.Split('\\', '.');
 
-            }
-
-            foreach (string FilePath in availableFiles)
-            {
-                pokemonList.Add(LoadPokemons(FilePath));
+                if (name.Length!=6)
+                {
+                    Debug.Log(file);
+                    pokemonList.Add(LoadPokemons(file, name[3]));
+                }
             }
         }
 
@@ -56,7 +58,7 @@ public class CombatManager : MonoBehaviour
 
 
     // Update is called once per frame
-    static public Pokemon LoadPokemons(string FilePath)
+    static public Pokemon LoadPokemons(string FilePath, string name)
     {
         Pokemon pokemon = new Pokemon();
 
@@ -64,7 +66,6 @@ public class CombatManager : MonoBehaviour
         {
             List<string> StateList = new List<string>();
 
-            string[] name = FilePath.Split('\\', '.');
             string[] abilities = spc.ReadLine().Split(',');
             string[] Text = spc.ReadLine().Split(',');
             string[] States = spc.ReadLine().Split(',');
@@ -81,30 +82,27 @@ public class CombatManager : MonoBehaviour
                 int.TryParse(stats[i + 1], out SValue[i]);
             }
 
-            pokemon = new Pokemon(name[1], abilities, Text, StateList, SValue);
-            Debug.Log(name[1]);
+            pokemon = new Pokemon(name, abilities, Text, StateList, SValue);
+            Debug.Log(name + " loaded");
+
 
         }
         return pokemon;
 
 
     }
-    //static public List<string> GetListOfPartyNames(string CharacterName)
-    //{
+    public Pokemon GetPokemon(bool type)
+    {
+        if(type)
+        {
+            return AListOfPokemons[0];
+        }
+        else
+        {
+            return EListOfPokemons[0];
+        }
+    }
 
-    //    string[] SPCFolder = Directory.GetFiles(folder);
-
-    //    foreach (string FilesPath in SPCFolder)
-    //    {
-    //        string[] name = FilesPath.Split('\\', '.');
-
-    //        if (!ListOfPokemons.Contains(name[1]))
-    //        {
-    //            ListOfPokemons.Add(name[1]);
-    //        }
-    //    }
-    //    return ListOfPokemons;
-    //}
 
     void Update()
 

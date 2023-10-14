@@ -1,3 +1,0 @@
-0, sluniel
-1, roll, spit, fortress, heavy
-2, evades next attack, deals damage, increases damage and defense,  invulneravility against all states

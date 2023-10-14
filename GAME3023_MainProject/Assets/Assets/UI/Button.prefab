@@ -146,10 +146,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d102a3f3485a8bd419c4aebe34056663, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Free: {fileID: 1272825844, guid: b4e09e05bf44f1843aa14f615944d6cb, type: 3}
-  Hold: {fileID: -1541942666, guid: 2a9d568f59af1e041a467d9c888994a2, type: 3}
-  Press: {fileID: 14730078, guid: 9aea100b51880e04fa32df964c9fe14b, type: 3}
   IsPressed: 0
+  AbilityNum: 0
 --- !u!1 &5761402389814475715
 GameObject:
   m_ObjectHideFlags: 0
@@ -208,7 +206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -217,10 +215,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
-    m_FontStyle: 0
+    m_FontSize: 20
+    m_FontStyle: 1
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 0
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
