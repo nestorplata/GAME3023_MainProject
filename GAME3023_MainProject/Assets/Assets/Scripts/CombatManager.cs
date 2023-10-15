@@ -1,33 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
-using System.Text;
 using System.IO;
-using Unity.VisualScripting;
-using UnityEngine.Rendering;
-using UnityEngine.WSA;
-using Unity.IO.LowLevel.Unsafe;
+using System.Linq;
 
 public class CombatManager : MonoBehaviour
 {
-    public static string PlayerName;
-    public static string EnemyName;
+
 
     static List<Pokemon> AListOfPokemons;
     static List<Pokemon> EListOfPokemons;
+    static string AnimationPath;
 
-    static List<string> availableFiles;
-    static string path = ".txt";
-    
+
     // Start is called before the first frame update
     void Awake()
     {
         AListOfPokemons = new List<Pokemon>();
         EListOfPokemons = new List<Pokemon>();
-        availableFiles = new List<string>();
+        AnimationPath = "Assets\\Assets\\Characters\\Sprites\\Animations\\Pkmn\\";
+
         AListOfPokemons = SetPokemonList("Assets\\Save0\\player");
         EListOfPokemons = SetPokemonList("Assets\\Save0\\enemy");
+
     }
 
     static public List<Pokemon> SetPokemonList(string folder)
@@ -61,11 +56,11 @@ public class CombatManager : MonoBehaviour
     static public Pokemon LoadPokemons(string FilePath, string name)
     {
         Pokemon pokemon = new Pokemon();
-
+        
         using (StreamReader spc = new StreamReader(FilePath))
         {
+            List<Sprite> sprites = SetPNGList(AnimationPath + name);
             List<string> StateList = new List<string>();
-
             string[] abilities = spc.ReadLine().Split(',');
             string[] Text = spc.ReadLine().Split(',');
             string[] States = spc.ReadLine().Split(',');
@@ -82,8 +77,8 @@ public class CombatManager : MonoBehaviour
                 int.TryParse(stats[i + 1], out SValue[i]);
             }
 
-            pokemon = new Pokemon(name, abilities, Text, StateList, SValue);
-            Debug.Log(name + " loaded");
+            pokemon = new Pokemon(name, abilities, Text, StateList, SValue, sprites);
+            Debug.Log("Pokemon "+ name + " loaded");
 
 
         }
@@ -91,22 +86,70 @@ public class CombatManager : MonoBehaviour
 
 
     }
-    public Pokemon GetPokemon(bool type)
+
+    public static List<Sprite> SetPNGList(string folder)
     {
-        if(type)
+        List<Sprite> Sprites = new List<Sprite>();
+
+        if (Directory.Exists(folder))
         {
-            return AListOfPokemons[0];
+            string[] SPCFolder = Directory.GetFiles(folder);
+
+            foreach (string file in SPCFolder)
+            {
+                string[] name = file.Split('\\', '.');
+
+                if (name.Length<10)
+                {
+                    Debug.Log(name[name.Length - 2]);
+                    Sprites.Add(LoadNewSprite(file, name[name.Length-2]));
+                }
+            }
+        }
+        return Sprites;
+    }
+
+
+
+    public static Sprite LoadNewSprite(string FilePath, string Name, float PixelsPerUnit = 100.0f, SpriteMeshType spriteType = SpriteMeshType.Tight)
+    {
+
+        Texture2D SpriteTexture = LoadTexture(FilePath);
+        Sprite NewSprite = Sprite.Create(SpriteTexture, new Rect(0, 0, SpriteTexture.width, SpriteTexture.height), new Vector2(0, 0), PixelsPerUnit, 0, spriteType);
+        NewSprite.name= Name;
+        return NewSprite;
+    }
+
+    public static Texture2D LoadTexture(string FilePath)
+    {
+
+        Texture2D Tex2D;
+        byte[] FileData;
+
+        if (File.Exists(FilePath))
+        {
+            FileData = File.ReadAllBytes(FilePath);
+            Tex2D = new Texture2D(2, 2);           // Create new "empty" texture
+            if (Tex2D.LoadImage(FileData))           // Load the imagedata into the texture (size is set automatically)
+                return Tex2D;                 // If data = readable -> return texture
+        }
+        return null;                     // Return null if load failed
+    }
+
+    public Pokemon GetPokemon(bool type, int number = 0)
+    {
+        if (type)
+        {
+            return AListOfPokemons[number];
         }
         else
         {
-            return EListOfPokemons[0];
+            return EListOfPokemons[number];
         }
     }
 
-
-    void Update()
-
-    {
-
-    }
 }
+
+
+
+

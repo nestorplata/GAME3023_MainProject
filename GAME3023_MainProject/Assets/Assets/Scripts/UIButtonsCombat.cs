@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.XR;
+using static UnityEngine.UIElements.UxmlAttributeDescription;
 //using UnityEngine.UIElements;
 
-public class UIButtonsCombat : MonoBehaviour
+public class UIButtonsCombat : MonoBehaviour, IPointerEnterHandler
 {
     
     public bool IsPressed;
@@ -15,20 +18,27 @@ public class UIButtonsCombat : MonoBehaviour
     Button UIButton;
     CombatManager manager;
     Pokemon pokemon;
+    TextBoxBehaviur TextBlock;
+
+
     Vector3 OriginalSize;
     
 
     // Start is called before the first frame update
     void Start()
     {
+        TextBlock = GameObject.Find("Text Screen").GetComponent<TextBoxBehaviur>();
+
         UIButton = GetComponent<Button>();
         manager = gameObject.transform.parent.GetComponentInParent<CombatManager>();
         pokemon = manager.GetPokemon(true);
-        OriginalSize= transform.localScale;
+
+        OriginalSize = transform.localScale;
 
         Text text = gameObject.transform.GetChild(0).GetComponent<Text>();
-        text.text = pokemon.getabilities()[AbilityNum+1];
+        text.text = pokemon.getabilities(AbilityNum);
         coroutine = ReturnSize(1.0f);
+
         //Checkin no other button has been pressed
 
     }
@@ -38,6 +48,9 @@ public class UIButtonsCombat : MonoBehaviour
         if (!IsPressed)
         {
             transform.localScale = OriginalSize * 3 / 4;
+            TextBlock.SetChoosenAbility(AbilityNum);
+            TextBlock.SetText(pokemon.getname() +" used "+pokemon.getabilities(AbilityNum));
+
             foreach (Button button in FindObjectsOfType<Button>())
             {
                 button.GetComponent<Button>().GetComponent<UIButtonsCombat>().AbilityChoseen();
@@ -51,11 +64,6 @@ public class UIButtonsCombat : MonoBehaviour
 
     }
     // Update is called once per frame
-    void Update()
-    {
-        
-
-    }
 
     IEnumerator ReturnSize(float waitTime)
     {
@@ -64,4 +72,13 @@ public class UIButtonsCombat : MonoBehaviour
         UIButton.interactable = true;
         transform.localScale = OriginalSize;
     }
+
+    public void OnPointerEnter(PointerEventData pointerEventData)
+    {
+        if(UIButton.interactable)
+            TextBlock.SetText(pokemon.gettext(AbilityNum));
+
+    }
+
+
 }

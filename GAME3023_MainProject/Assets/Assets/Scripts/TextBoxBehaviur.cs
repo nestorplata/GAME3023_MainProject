@@ -1,15 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TextBoxBehaviur : MonoBehaviour
 {
     // Start is called before the first frame update
     int ChoosenAbility;
-    string Explanation;
+    Text Explanation;
     void Start()
     {
-        
+        Explanation = transform.GetChild(0).GetComponent<Text>();
     }
 
     // Update is called once per frame
@@ -18,14 +19,14 @@ public class TextBoxBehaviur : MonoBehaviour
         
     }
 
-    //void SetChoosenAbility(string name,  string abilityname)
-    //{
-    //    ChoosenAbility = choice;
+    public void SetChoosenAbility(int chosen)
+    {
+        ChoosenAbility = chosen;
+        Debug.Log(ChoosenAbility);
 
-    //}
-    //void SetChoosenAbility(int choice, string textToShow, string abilityname)
-    //{
-    //    ChoosenAbility = choice;
-
-    //}
+    }
+    public void SetText(string text)
+    {
+        Explanation.text = text;
+    }
 }

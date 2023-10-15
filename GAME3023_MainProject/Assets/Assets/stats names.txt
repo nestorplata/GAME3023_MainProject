@@ -57,6 +57,7 @@ affect everything else as shown on the bevabiour tree
 
 <> typ1
 distributing pokemon list
+	list 1
 
 
 https://opengameart.org/content/hornet-or-wasp
