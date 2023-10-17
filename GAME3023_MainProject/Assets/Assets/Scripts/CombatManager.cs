@@ -59,7 +59,7 @@ public class CombatManager : MonoBehaviour
         
         using (StreamReader spc = new StreamReader(FilePath))
         {
-            List<Sprite> sprites = SetPNGList(AnimationPath + name);
+            List<List<Sprite>> sprites = SetPNGLists(AnimationPath + name);
             List<string> StateList = new List<string>();
             string[] abilities = spc.ReadLine().Split(',');
             string[] Text = spc.ReadLine().Split(',');
@@ -87,9 +87,11 @@ public class CombatManager : MonoBehaviour
 
     }
 
-    public static List<Sprite> SetPNGList(string folder)
+    public static List<List<Sprite>> SetPNGLists(string folder)
     {
-        List<Sprite> Sprites = new List<Sprite>();
+        List<List<Sprite>> Animations = new List<List<Sprite>>();
+        List<Sprite> ASprites = new List<Sprite>();
+        int Anum=0;
 
         if (Directory.Exists(folder))
         {
@@ -97,17 +99,29 @@ public class CombatManager : MonoBehaviour
 
             foreach (string file in SPCFolder)
             {
-                string[] name = file.Split('\\', '.');
+                string[] name = file.Split('\\',',', '.');
 
-                if (name.Length<10)
+                if (name.Length<11)
                 {
-                    Debug.Log(name[name.Length - 2]);
-                    Sprites.Add(LoadNewSprite(file, name[name.Length-2]));
+                    int TmpNum;
+                    int.TryParse(name[name.Length - 3], out TmpNum);
+                    if (Anum != TmpNum)
+                    {
+                        Animations.Add(ASprites);
+                        ASprites = new List<Sprite>();
+                        Anum = TmpNum;
+                    }
+                    Debug.Log(name[name.Length - 3]+','+ name[name.Length - 2]);
+                    ASprites.Add(LoadNewSprite(file, name[name.Length - 2]));
                 }
             }
+            Animations.Add(ASprites);
+
         }
-        return Sprites;
+        return Animations;
     }
+
+
 
 
 

@@ -37,24 +37,26 @@ public class SelectedPokemon : MonoBehaviour
         if (manager)
         {
             Spokemon = manager.GetPokemon(IsAlly);
-            PokemonPngs = Spokemon.getAnimation();
-            if(PokemonPngs.Count > 1)
-            {
-                PlayUIAnim();
-            }
+            CurrentImage.sprite = Spokemon.GetSprite();
             CurrentImage.rectTransform.position = CurrentImage.rectTransform.position - new Vector3(50, 100, 0);
             CurrentImage.rectTransform.localScale = CurrentImage.rectTransform.localScale * 3;
             CurrentImage.rectTransform.sizeDelta = CurrentImage.sprite.texture.Size();
             DisplayedName.text = Spokemon.getname();
+
+
             if (!IsAlly)
             {
                 CurrentImage.rectTransform.Rotate(0, 180, 0);
             }
+            if (PokemonPngs.Count > 1)
+            {
+                PokemonPngs = Spokemon.getAnimation(0);
+
+                PlayUIAnim();
+            }
 
         }
     }
-
-
 
     public void PlayUIAnim()
     {
@@ -79,8 +81,34 @@ public class SelectedPokemon : MonoBehaviour
         if (IsDone == false)
             CorotineAnim = StartCoroutine(Func_PlayAnimUI());
     }
+
+    public void SetPokemonPngs(List<Sprite> sprites)
+    {
+        PokemonPngs = sprites;
+    }
+
+    public void Rotate()
+    {
+
+        StartCoroutine(Rotation());
+    }
+
+    IEnumerator Rotation(float time =5.0f)
+    {
+
+        yield return new WaitForSeconds(time/2);
+        CurrentImage.rectTransform.Rotate(0, 180, 0);
+        yield return new WaitForSeconds(time/2);
+
+
+        CurrentImage.rectTransform.Rotate(0, -180, 0);
+
+    }
+
     // Update is called once per frame
     void Update()
     {
+
+
     }
 }

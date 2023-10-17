@@ -11,17 +11,19 @@ public class Pokemon : MonoBehaviour
     int Attack;
     int Defense;
     int Evasion;
+    int fortification=1;
     string Pname;
     string[] Abilities;
     string[] TextInformation;
     List<string> States;
 
-    List<Sprite> Animations;
+
+    List<List<Sprite>> Animations;
     // Start is called before the first frame update
 
     public Pokemon(string name, string[] abilities,
         string[] Text, List<string> states, int[] stats,
-         List<Sprite> animations)
+         List<List<Sprite>> animations)
     {
         Pname = name;
         Abilities = abilities;
@@ -37,8 +39,8 @@ public class Pokemon : MonoBehaviour
     public Pokemon()
     {
         Pname = "generalPokemon";
-        Abilities = new string[4];
-        TextInformation = new string[4];
+        Abilities = new string[5];
+        TextInformation = new string[5];
         States = new List<string>();
         Life = 1;
         Attack = 1;
@@ -56,16 +58,16 @@ public class Pokemon : MonoBehaviour
     {
         return Pname;
     }
-    public string getabilities(int i)
+    public string getabilities(int i = 1)
     {
         if (Abilities.Length > i)
-            return Abilities[i + 1];
+            return Abilities[i];
         else return null;
     }
-    public string gettext(int i)
+    public string gettext(int i=1)
     {
         if(TextInformation.Length > i)
-            return TextInformation[i+1];
+            return TextInformation[i];
         else return null;
     }
     public List<string> getstates()
@@ -75,11 +77,29 @@ public class Pokemon : MonoBehaviour
 
     public Sprite GetSprite()
     {
-        return Animations.First();
+        return getAnimation()[0];
     }
-    public List<Sprite> getAnimation()
+    public List<Sprite> getAnimation(int i  = 0)
     {
-        return Animations;
+        return Animations[i];
+
+
+    }
+    public void SetFortification(int i)
+    {
+        
+        fortification = fortification +i;
+        if (fortification > 2)
+        {
+            fortification = 2;
+        }
+        if (fortification < 0)
+            fortification = 0;
+    }
+    public int GetFortification()
+    {
+
+       return fortification;
     }
 
 }
