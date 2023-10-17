@@ -10,5 +10,7 @@ grey grid <a href="http://www.freeimageslive.co.uk/free_stock_image/greytilesjpg
 Items by Henrique Lazarini (7Soul1) - https://opengameart.org/content/496-pixel-art-icons-for-medievalfantasy-rpg 
 World tile set by ArMM1998 - https://opengameart.org/content/zelda-like-tilesets-and-sprites 
 UI by Buch - https://opengameart.org/content/golden-ui
-
+Sloniel by UMZ - https://opengameart.org/content/animated-pixel-slug
+Waspious by MikeMoon - https://opengameart.org/content/hornet-or-wasp
 Fonts made on https://fontmeme.com/famous-fonts/
+Sloniel animations made on Pixlr e and Piskel
