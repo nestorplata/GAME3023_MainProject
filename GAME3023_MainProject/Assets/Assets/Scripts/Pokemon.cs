@@ -11,7 +11,7 @@ public class Pokemon : MonoBehaviour
     int Attack;
     int Defense;
     int Evasion;
-    int fortification=1;
+    int stateval;
     string Pname;
     string[] Abilities;
     string[] TextInformation;
@@ -35,7 +35,10 @@ public class Pokemon : MonoBehaviour
         Evasion = stats[3];
         Abilities = abilities;
         Animations = animations;
+        int.TryParse(states[1], out stateval);
+
     }
+
     public Pokemon()
     {
         Pname = "generalPokemon";
@@ -85,21 +88,21 @@ public class Pokemon : MonoBehaviour
 
 
     }
-    public void SetFortification(int i)
+    public void SetStateVal(int i)
     {
         
-        fortification = fortification +i;
-        if (fortification > 2)
+        stateval = stateval +i;
+        if (stateval > 2)
         {
-            fortification = 2;
+            stateval = 2;
         }
-        if (fortification < 0)
-            fortification = 0;
+        if (stateval < 0)
+            stateval = 0;
     }
-    public int GetFortification()
+    public int GetStateVal()
     {
 
-       return fortification;
+       return stateval;
     }
 
 }

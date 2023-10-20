@@ -1,4 +1,4 @@
-0, spit, stick, fortify, shake
-1, deals regular damage, higly reduce enemy evasion, increases damage and defense stats, remove poison 
-2, slime, shake removes fortify but augments evasion  
+0, HeadButt, irregular, fortify, shake, skip
+1, deals regular damage, reduce enemy evasion, damage and defense increases, removes poison 
+2, 1, slime, shake removes fortify but increases evasion  
 3, 20, 20, 20, 20

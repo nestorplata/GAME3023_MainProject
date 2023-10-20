@@ -101,7 +101,7 @@ public class CombatManager : MonoBehaviour
             {
                 string[] name = file.Split('\\',',', '.');
 
-                if (name.Length<11)
+                if (name.Last()!="meta")
                 {
                     int TmpNum;
                     int.TryParse(name[name.Length - 3], out TmpNum);
@@ -111,7 +111,7 @@ public class CombatManager : MonoBehaviour
                         ASprites = new List<Sprite>();
                         Anum = TmpNum;
                     }
-                    Debug.Log(name[name.Length - 3]+','+ name[name.Length - 2]);
+                    Debug.Log(name[name.Length - 3]+','+ name[name.Length - 2]); 
                     ASprites.Add(LoadNewSprite(file, name[name.Length - 2]));
                 }
             }
@@ -130,8 +130,10 @@ public class CombatManager : MonoBehaviour
 
         Texture2D SpriteTexture = LoadTexture(FilePath);
         Sprite NewSprite = Sprite.Create(SpriteTexture, new Rect(0, 0, SpriteTexture.width, SpriteTexture.height), new Vector2(0, 0), PixelsPerUnit, 0, spriteType);
-        NewSprite.name= Name;
+        NewSprite.name = Name;
         return NewSprite;
+
+
     }
 
     public static Texture2D LoadTexture(string FilePath)

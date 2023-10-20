@@ -67,29 +67,33 @@ public class UIButtonsCombat : MonoBehaviour, IPointerEnterHandler
                 button.GetComponent<Button>().GetComponent<UIButtonsCombat>().AbilityChoseen();
 
             }
-            switch(AbilityNum)
+            if(Apokemon.getname()=="waspius")
             {
-                case 2:
-                    Apokemon.SetFortification(1);
-                    break;
-                case 4:
-                    Apokemon.SetFortification(-1);
-                    break;
+                switch (AbilityNum)
+                {
+                    case 1:
+                        AllyInformation.RevertAnimation();
+                        break;
+                    case 2:
+                        AllyInformation.RevertAnimation();
+                        break;
 
+                }
+                AllyInformation.SetPokemonPngs(Apokemon.getAnimation(AbilityNum));
 
             }
-            switch (Apokemon.GetFortification())
+            else if(Apokemon.getname()=="sloniel")
             {
-                case 0:
-                    AllyInformation.SetPokemonPngs(Apokemon.getAnimation(2));
-                    //AllyInformation.Rotate();
-                    break;
-                case 1:
-                    AllyInformation.SetPokemonPngs(Apokemon.getAnimation(0));
-                    break;
-                case 2:
-                    AllyInformation.SetPokemonPngs(Apokemon.getAnimation(1));
-                    break;
+                switch (AbilityNum)
+                {
+                    case 3:
+                        Apokemon.SetStateVal(1);
+                        break;
+                    case 4:
+                        Apokemon.SetStateVal(-1);
+                        break;
+                }
+                AllyInformation.SetPokemonPngs(Apokemon.getAnimation(Apokemon.GetStateVal()+1));
             }
 
         }
@@ -101,7 +105,7 @@ public class UIButtonsCombat : MonoBehaviour, IPointerEnterHandler
 
     }
 
-    public void AbilityChoseen(float value=5.0f)
+    public void AbilityChoseen(float value=4.0f)
     {
         UIButton.interactable = false;
         //Debug.Log("AnimationChanged to" + AbilityNum);

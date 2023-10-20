@@ -10,7 +10,7 @@ public class SelectedPokemon : MonoBehaviour
 {
     public List<Sprite> PokemonPngs;
     public bool IsAlly;
-    public float AnimationSpeed = 0.5f;
+    public float AnimationSpeed = 0.03f;
     private int IndexSprite;
 
     CombatManager manager;
@@ -38,15 +38,25 @@ public class SelectedPokemon : MonoBehaviour
         {
             Spokemon = manager.GetPokemon(IsAlly);
             CurrentImage.sprite = Spokemon.GetSprite();
-            CurrentImage.rectTransform.position = CurrentImage.rectTransform.position - new Vector3(50, 100, 0);
-            CurrentImage.rectTransform.localScale = CurrentImage.rectTransform.localScale * 3;
             CurrentImage.rectTransform.sizeDelta = CurrentImage.sprite.texture.Size();
+            CurrentImage.rectTransform.localScale = CurrentImage.rectTransform.localScale * 4;
             DisplayedName.text = Spokemon.getname();
+
 
 
             if (!IsAlly)
             {
-                CurrentImage.rectTransform.Rotate(0, 180, 0);
+                CurrentImage.rectTransform.position = CurrentImage.rectTransform.position + new Vector3(0, 0, 0);
+
+            }
+            else
+            {
+                if(Spokemon.getname()=="waspius") 
+                {
+                    CurrentImage.rectTransform.Rotate(0, 180, 0);
+
+                }
+                CurrentImage.rectTransform.position = CurrentImage.rectTransform.position - new Vector3(50, 0, 0);
             }
             if (PokemonPngs.Count > 1)
             {
@@ -69,6 +79,22 @@ public class SelectedPokemon : MonoBehaviour
         IsDone = true;
         StopCoroutine(Func_PlayAnimUI());
     }
+    public void RevertAnimation()
+    {
+        StartCoroutine(Return());
+    }
+
+
+    public void SetPokemonPngs(List<Sprite> sprites)
+    {
+        PokemonPngs = sprites;
+    }
+
+    public void Rotate()
+    {
+
+        StartCoroutine(Rotation());
+    }
     IEnumerator Func_PlayAnimUI()
     {
         yield return new WaitForSeconds(AnimationSpeed);
@@ -81,27 +107,21 @@ public class SelectedPokemon : MonoBehaviour
         if (IsDone == false)
             CorotineAnim = StartCoroutine(Func_PlayAnimUI());
     }
-
-    public void SetPokemonPngs(List<Sprite> sprites)
-    {
-        PokemonPngs = sprites;
-    }
-
-    public void Rotate()
-    {
-
-        StartCoroutine(Rotation());
-    }
-
-    IEnumerator Rotation(float time =5.0f)
+    IEnumerator Rotation(float time =4.0f)
     {
 
         yield return new WaitForSeconds(time/2);
         CurrentImage.rectTransform.Rotate(0, 180, 0);
         yield return new WaitForSeconds(time/2);
 
-
         CurrentImage.rectTransform.Rotate(0, -180, 0);
+
+    }
+
+    IEnumerator Return(float time = 2.0f, int state=0)
+    {
+        yield return new WaitForSeconds(time);
+        SetPokemonPngs(Spokemon.getAnimation(state));
 
     }
 
