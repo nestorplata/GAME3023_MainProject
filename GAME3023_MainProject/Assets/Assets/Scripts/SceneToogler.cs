@@ -4,36 +4,51 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEditor;
 using System.IO;
+using UnityEngine.UI;
 
 public class SceneToogler : MonoBehaviour
 {
-
+    private Button button;
     // Start is called before the first frame update
     void Start()
     {
+        button = GetComponent<Button>();
+        button.onClick.AddListener(delegate { Deactivate(); });
 
     }
 
     // Update is called once per frame
-    void Update()
+    public void Deactivate()
     {
-
+        StartCoroutine(ReturnSize(1.0f));
     }
+
     public void MoveToScene(int sceneID)
     {
             SceneManager.LoadScene(sceneID);
-        transform.localScale = Vector3.one/2;
     }
     public void Quit()
     {
         Application.Quit();
         EditorApplication.ExitPlaymode();
-        transform.localScale = Vector3.one / 2;
 
     }
     public void EraseSave ()
     {
        new StreamWriter("Assets\\Saved\\Position.txt").Close();
+    }
+    public void CheckForSave(int ID)
+    {
+        StreamReader Reader = new StreamReader("Assets\\Saved\\Position.txt");
+        if (Reader.Peek() >= 0)
+        {
+            MoveToScene(ID);
+        }
+        else
+        {
+            Debug.Log("Unable to Open File");
+        }
+        Reader.Close();
     }
 
     public void SaveGame(GameObject player)
@@ -54,12 +69,19 @@ public class SceneToogler : MonoBehaviour
                 Restant.y = 0;
             }
 
-            Debug.Log(player.transform.position);
-            Debug.Log(Restant);
             writer.WriteLine(player.transform.position-Restant);
         }
+           
 
     }
 
+    IEnumerator ReturnSize(float time)
+    {
+        transform.localScale = transform.localScale*3/2;
+        button.interactable = false;
+        yield return new WaitForSeconds(time);
+        transform.localScale = transform.localScale*2/3;
+        button.interactable = true;
+    }
 
 }
