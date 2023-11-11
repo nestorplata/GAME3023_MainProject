@@ -41,9 +41,6 @@ public class SelectedPokemon : MonoBehaviour
             CurrentImage.rectTransform.sizeDelta = CurrentImage.sprite.texture.Size();
             CurrentImage.rectTransform.localScale = CurrentImage.rectTransform.localScale * 4;
             DisplayedName.text = Spokemon.getname();
-
-
-
             if (!IsAlly)
             {
                 CurrentImage.rectTransform.position = CurrentImage.rectTransform.position + new Vector3(0, 0, 0);
@@ -67,6 +64,49 @@ public class SelectedPokemon : MonoBehaviour
 
         }
     }
+    
+    public void OnTurn(int ability)
+    {
+
+        if (Spokemon.getname() == "waspius")
+        {
+            switch (ability)
+            {
+                case 1:
+                    StartCoroutine(Return());
+                    break;
+                case 2:
+                    StartCoroutine(Return());
+                    break;
+                case 5:
+                    StartCoroutine(Rotation());
+                    break;
+            }
+            SetPokemonPngs(Spokemon.getAnimation(ability));
+
+        }
+        else if (Spokemon.getname() == "sloniel")
+        {
+            switch (ability)
+            {
+                case 3:
+                    Spokemon.SetStateVal(1);
+                    break;
+                case 4:
+                    Spokemon.SetStateVal(-1);
+                    break;
+                case 5:
+                    StartCoroutine(Rotation());
+                    break;
+            }
+            SetPokemonPngs(Spokemon.getAnimation(Spokemon.GetStateVal() + 1));
+        }
+        
+    }
+    public void AfterTurn(int ability)
+    {
+        StartCoroutine(WaitTurn(ability));
+    }
 
     public void PlayUIAnim()
     {
@@ -79,10 +119,6 @@ public class SelectedPokemon : MonoBehaviour
         IsDone = true;
         StopCoroutine(Func_PlayAnimUI());
     }
-    public void RevertAnimation()
-    {
-        StartCoroutine(Return());
-    }
 
 
     public void SetPokemonPngs(List<Sprite> sprites)
@@ -90,11 +126,6 @@ public class SelectedPokemon : MonoBehaviour
         PokemonPngs = sprites;
     }
 
-    public void Rotate()
-    {
-
-        StartCoroutine(Rotation());
-    }
     IEnumerator Func_PlayAnimUI()
     {
         yield return new WaitForSeconds(AnimationSpeed);
@@ -109,7 +140,6 @@ public class SelectedPokemon : MonoBehaviour
     }
     IEnumerator Rotation(float time =4.0f)
     {
-
         yield return new WaitForSeconds(time/2);
         CurrentImage.rectTransform.Rotate(0, 180, 0);
         yield return new WaitForSeconds(time/2);
@@ -124,11 +154,16 @@ public class SelectedPokemon : MonoBehaviour
         SetPokemonPngs(Spokemon.getAnimation(state));
 
     }
-
-    // Update is called once per frame
-    void Update()
+    IEnumerator WaitTurn(int  ability)
     {
-
-
+        yield return new WaitForSeconds(2.0f);
+        OnTurn(ability);
     }
+
+    public Pokemon GetPokemon()
+    {
+        return Spokemon;
+    }
+    // Update is called once per frame
+
 }

@@ -1,12 +1,9 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using UnityEngine.XR;
-using static UnityEngine.UIElements.UxmlAttributeDescription;
-//using UnityEngine.UIElements;
 
 public class UIButtonsCombat : MonoBehaviour, IPointerEnterHandler
 {
@@ -14,12 +11,11 @@ public class UIButtonsCombat : MonoBehaviour, IPointerEnterHandler
     public bool IsPressed;
     public int AbilityNum;
     private IEnumerator coroutine;
+    public int random;
 
     CombatManager manager;
-
     SelectedPokemon AllyInformation;
     SelectedPokemon EnemyInformation;
-
     Pokemon Apokemon;
     Pokemon Epokemon;
 
@@ -33,13 +29,12 @@ public class UIButtonsCombat : MonoBehaviour, IPointerEnterHandler
     // Start is called before the first frame update
     void Start()
     {
+        manager = GetComponentInParent<CombatManager>();
         TextBlock = GameObject.Find("Text Screen").GetComponent<TextBoxBehaviur>();
         AllyInformation = GameObject.Find("APokemon").GetComponent<SelectedPokemon>();
         EnemyInformation = GameObject.Find("EPokemon").GetComponent<SelectedPokemon>();
-
-
         UIButton = GetComponent<Button>();
-        manager = gameObject.transform.parent.GetComponentInParent<CombatManager>();
+
         Apokemon = manager.GetPokemon(true);
         Epokemon = manager.GetPokemon(false);
 
@@ -48,7 +43,8 @@ public class UIButtonsCombat : MonoBehaviour, IPointerEnterHandler
         Text text = gameObject.transform.GetChild(0).GetComponent<Text>();
         text.text = Apokemon.getabilities(AbilityNum);
         coroutine = ReturnSize(4.0f);
-
+        
+        
         //Checkin no other button has been pressed
 
     }
@@ -60,44 +56,24 @@ public class UIButtonsCombat : MonoBehaviour, IPointerEnterHandler
             transform.localScale = OriginalSize * 3 / 4;
             TextBlock.SetChoosenAbility(AbilityNum);
             TextBlock.SetText(Apokemon.getname() +" used "+Apokemon.getabilities(AbilityNum));
-            EnemyInformation.Rotate();
 
             foreach (Button button in FindObjectsOfType<Button>())
             {
                 button.GetComponent<Button>().GetComponent<UIButtonsCombat>().AbilityChoseen();
 
             }
-            if(Apokemon.getname()=="waspius")
-            {
-                switch (AbilityNum)
-                {
-                    case 1:
-                        AllyInformation.RevertAnimation();
-                        break;
-                    case 2:
-                        AllyInformation.RevertAnimation();
-                        break;
 
-                }
-                AllyInformation.SetPokemonPngs(Apokemon.getAnimation(AbilityNum));
+            AllyInformation.OnTurn(AbilityNum);
 
-            }
-            else if(Apokemon.getname()=="sloniel")
-            {
-                switch (AbilityNum)
-                {
-                    case 3:
-                        Apokemon.SetStateVal(1);
-                        break;
-                    case 4:
-                        Apokemon.SetStateVal(-1);
-                        break;
-                }
-                AllyInformation.SetPokemonPngs(Apokemon.getAnimation(Apokemon.GetStateVal()+1));
-            }
+            
+            EnemyInformation.AfterTurn(AbilityNum);
+
+
 
         }
     }
+
+
     public void OnPointerEnter(PointerEventData pointerEventData)
     {
         if (UIButton.interactable)

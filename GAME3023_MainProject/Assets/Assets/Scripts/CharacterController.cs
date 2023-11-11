@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using System.IO;
+using System.Globalization;
+using System;
 
 public class CharacterController : MonoBehaviour
 {
@@ -25,6 +28,22 @@ public class CharacterController : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         Collider = GetComponent<BoxCollider2D>();
+        using (StreamReader Reader = new StreamReader("Assets\\Saved\\Position.txt"))
+        {
+            Debug.Log(Reader.Peek());
+            if (Reader.Peek() >= 0)
+            {
+                string[] PlayerPosition = Reader.ReadLine().Split(',', '(', ')');
+                Vector2 Position = Vector2.zero;
+                Debug.Log(PlayerPosition[1]+"&"+ PlayerPosition[2]);
+
+                Position.x= (float)Convert.ToDouble(PlayerPosition[1]);
+                Position.y= (float)Convert.ToDouble(PlayerPosition[2]);
+
+
+                transform.position = Position;
+            }
+        }
     }
 
     // Update is called once per frame
@@ -59,7 +78,6 @@ public class CharacterController : MonoBehaviour
 
             if (input != Vector2.zero)
             {
-                Debug.Log(input);
                 var targetPos = transform.position;
                 targetPos.x += input.x*TileSize;
                 targetPos.y += input.y*TileSize;
