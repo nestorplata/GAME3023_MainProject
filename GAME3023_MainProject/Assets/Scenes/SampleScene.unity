@@ -308,7 +308,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcd6c278ad94ae64e8befa579e12e7c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StepTileSounds:
+  - sprite: {fileID: 1042188528, guid: 6b3f6bdc9fac5a948a3b0fc84a8d18d5, type: 3}
+    FootStepSoundClip: {fileID: 8300000, guid: 34d3b34e7c0132846995a75e007dabea, type: 3}
   BackGroundMap: {fileID: 791084159}
+  BasicFootStepSound: {fileID: 8300000, guid: 5bd87495248825845abaab2db8d85006, type: 3}
 --- !u!82 &322189060
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1684,7 +1688,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &791084157
 Transform:
   m_ObjectHideFlags: 0
@@ -6470,7 +6474,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1772617586
 Transform:
   m_ObjectHideFlags: 0
