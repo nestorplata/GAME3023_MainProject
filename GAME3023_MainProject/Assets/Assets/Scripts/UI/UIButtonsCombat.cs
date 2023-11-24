@@ -35,14 +35,14 @@ public class UIButtonsCombat : MonoBehaviour, IPointerEnterHandler
         EnemyInformation = GameObject.Find("EPokemon").GetComponent<SelectedPokemon>();
         UIButton = GetComponent<Button>();
 
-        Apokemon = manager.GetPokemon(true);
-        Epokemon = manager.GetPokemon(false);
+        //Apokemon = manager.GetPokemon(true);
+        //Epokemon = manager.GetPokemon(false);
 
         OriginalSize = transform.localScale;
 
-        Text text = gameObject.transform.GetChild(0).GetComponent<Text>();
-        text.text = Apokemon.getabilities(AbilityNum);
-        coroutine = ReturnSize(4.0f);
+        //Text text = gameObject.transform.GetChild(0).GetComponent<Text>();
+        //text.text = Apokemon.getabilities(AbilityNum);
+        //coroutine = ReturnSize(4.0f);
         
         
         //Checkin no other button has been pressed

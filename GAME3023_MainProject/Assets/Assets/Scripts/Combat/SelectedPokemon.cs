@@ -28,7 +28,7 @@ public class SelectedPokemon : MonoBehaviour
         Spokemon = new Pokemon();
         CurrentImage = gameObject.transform.GetChild(0).GetComponent<Image>();
         DisplayedName = transform.GetChild(1).GetComponent<Text>();
-        setPokemonImage();
+        //setPokemonImage();
 
     }
     

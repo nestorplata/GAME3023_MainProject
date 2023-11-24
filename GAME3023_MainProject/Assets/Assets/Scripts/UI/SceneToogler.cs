@@ -5,16 +5,19 @@ using UnityEngine;
 using UnityEditor;
 using System.IO;
 using UnityEngine.UI;
+using UnityEditor.SearchService;
 
 public class SceneToogler : MonoBehaviour
 {
     private Button button;
+    private Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
+        animator = GameObject.Find("LevelChanger").GetComponent<Animator>();
         button = GetComponent<Button>();
         button.onClick.AddListener(delegate { Deactivate(); });
-
     }
 
     // Update is called once per frame
@@ -25,7 +28,8 @@ public class SceneToogler : MonoBehaviour
 
     public void MoveToScene(int sceneID)
     {
-            SceneManager.LoadScene(sceneID);
+        StartCoroutine(WaitForSceneChange(1.0f, sceneID));
+
     }
     public void Quit()
     {
@@ -83,5 +87,14 @@ public class SceneToogler : MonoBehaviour
         transform.localScale = transform.localScale*2/3;
         button.interactable = true;
     }
+    IEnumerator WaitForSceneChange(float time, int sceneID)
+    {
+        animator.SetTrigger("OnSceneChange");
+        yield return new WaitForSeconds(time);
+        SceneManager.LoadScene(sceneID);
+
+    }
+
+
 
 }
