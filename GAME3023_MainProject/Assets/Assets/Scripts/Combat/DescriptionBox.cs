@@ -5,22 +5,12 @@ using UnityEngine.UI;
 
 public class DescriptionBox : MonoBehaviour
 {
-    // Start is called before the first frame update
-    int ChoosenAbility;
     Text explanation;
-    public void Setup()
+
+    public void Setup(string StartingMessage)
     {
-        explanation = transform.GetComponentInChildren<Text>();
-    }
-
-    // Update is called once per frame
-
-
-    public void SetChoosenAbility(int chosen)
-    {
-        ChoosenAbility = chosen;
-        Debug.Log(ChoosenAbility);
-
+        explanation =GetComponentInChildren<Text>();
+        SetText(StartingMessage);
     }
     public void SetText(string text)
     {

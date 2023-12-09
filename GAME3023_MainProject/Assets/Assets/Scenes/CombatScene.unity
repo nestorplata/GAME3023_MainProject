@@ -267,7 +267,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -7491259297659580239, guid: 5c26337d5a5858e46b77c237930d37c3, type: 3}
       propertyPath: AbilityNum
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -7491259297659580239, guid: 5c26337d5a5858e46b77c237930d37c3, type: 3}
       propertyPath: DescritpionBlock
@@ -741,9 +741,9 @@ MonoBehaviour:
   DescriptionBox: {fileID: 1647825946}
   AbilityButtons:
   - {fileID: 1586578199}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1852827891}
+  - {fileID: 1880569225}
+  - {fileID: 1416864278}
 --- !u!1 &1040334308
 GameObject:
   m_ObjectHideFlags: 0
@@ -824,7 +824,7 @@ GameObject:
   - component: {fileID: 1078686674}
   - component: {fileID: 1078686673}
   m_Layer: 0
-  m_Name: Abilities
+  m_Name: AbilityButtons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -919,7 +919,7 @@ GameObject:
   - component: {fileID: 1353355388}
   - component: {fileID: 1353355387}
   m_Layer: 0
-  m_Name: Text (Legacy)
+  m_Name: DescriptionText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -991,6 +991,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5863988160782194046, guid: 5c26337d5a5858e46b77c237930d37c3, type: 3}
   m_PrefabInstance: {fileID: 262611476193240024}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1416864278 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -7491259297659580239, guid: 5c26337d5a5858e46b77c237930d37c3, type: 3}
+  m_PrefabInstance: {fileID: 262611476193240024}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d102a3f3485a8bd419c4aebe34056663, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1565755781
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1001,7 +1012,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -7491259297659580239, guid: 5c26337d5a5858e46b77c237930d37c3, type: 3}
       propertyPath: AbilityNum
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7491259297659580239, guid: 5c26337d5a5858e46b77c237930d37c3, type: 3}
       propertyPath: DescritpionBlock
@@ -1185,7 +1196,7 @@ GameObject:
   - component: {fileID: 1647825944}
   - component: {fileID: 1647825946}
   m_Layer: 0
-  m_Name: DescriptionScreen
+  m_Name: DescriptionBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1258,11 +1269,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1647825942}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6913b7038a6c1c429fd070b8cf5513e, type: 3}
+  m_Script: {fileID: 11500000, guid: 7cf451cda31b1a744818b5ee1f082382, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChoosenAbility: 0
-  explanation: {fileID: 0}
 --- !u!1 &1752317925
 GameObject:
   m_ObjectHideFlags: 0
@@ -1307,7 +1316,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -7491259297659580239, guid: 5c26337d5a5858e46b77c237930d37c3, type: 3}
       propertyPath: AbilityNum
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -7491259297659580239, guid: 5c26337d5a5858e46b77c237930d37c3, type: 3}
       propertyPath: DescritpionBlock
@@ -1587,6 +1596,17 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1880569225 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -7491259297659580239, guid: 5c26337d5a5858e46b77c237930d37c3, type: 3}
+  m_PrefabInstance: {fileID: 463505212}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d102a3f3485a8bd419c4aebe34056663, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1899962251
 GameObject:
   m_ObjectHideFlags: 0
@@ -1935,7 +1955,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -7491259297659580239, guid: 5c26337d5a5858e46b77c237930d37c3, type: 3}
       propertyPath: AbilityNum
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -7491259297659580239, guid: 5c26337d5a5858e46b77c237930d37c3, type: 3}
       propertyPath: DescritpionBlock

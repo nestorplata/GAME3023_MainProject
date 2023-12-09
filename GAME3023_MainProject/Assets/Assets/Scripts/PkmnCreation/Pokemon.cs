@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class Pokemon
 {
-
     public PokemonBase Base { get; set; }
     public List<Ability> Abilities { get; set; }
     public int HP { get; set; }
 
     public Pokemon (PokemonBase @base)
     {
+
         Base = @base;
-        //change to max HP
+        Abilities = new List<Ability>();
+        foreach (var ability in Base.AbilitiesBases) 
+        {
+            Abilities.Add(new Ability(ability));
+        }
         HP = Base.MaxHP;
     }
+
 }

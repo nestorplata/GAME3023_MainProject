@@ -5,10 +5,6 @@ using UnityEngine.UI;
 
 public class UnitUI : MonoBehaviour
 {
-
-    PokemonBase SpokemonBase;
-    Pokemon Pokemon;
-
     [SerializeField] Image HPBar;
     [SerializeField] Text DisplayedName;
     [SerializeField] Text HPAmount;
@@ -25,11 +21,5 @@ public class UnitUI : MonoBehaviour
     {
         HPBar.transform.localScale = new Vector3(normalizedHP, 1f);
     }
-    public void SetUp()
-    {
-        Pokemon = new Pokemon(SpokemonBase);
-    }
-
-
 
 }

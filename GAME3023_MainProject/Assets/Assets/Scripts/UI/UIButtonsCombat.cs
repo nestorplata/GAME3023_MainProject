@@ -2,56 +2,60 @@ using System;
 using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class UIButtonsCombat : MonoBehaviour, IPointerEnterHandler
 {
-    [SerializeField] DescriptionBox DescritpionBlock;
-
-    public bool IsPressed;
-    public int AbilityNum;
-    //public int random;
-
-
-    Pokemon Apokemon;
-
-    //[SerializeField] AbilityBase AbilityBase;
-    Ability Ability;
-
+    [SerializeField] int AbilityNum;
     Button UIButton;
-
     Vector3 OriginalSize;
 
+    public delegate void GetAbilityDelegate(int Ability);
+    GetAbilityDelegate OnclickDelegate;
+    GetAbilityDelegate OnHooverDelegate;
 
-
-    public void OnMousePressed()
+    public void Setup(GetAbilityDelegate Click, GetAbilityDelegate Hoovering)
     {
-        if (!IsPressed)
-        {
-            StartCoroutine(ReturnSize(4.0f));
-            //DescritpionBlock.SetChoosenAbility(AbilityNum);
-            //DescritpionBlock.SetText(Apokemon.getname() +" used "+Apokemon.getabilities(AbilityNum));
-          //foreach (Button button in FindObjectsOfType<Button>())
-            //{
-            //    button.GetComponent<Button>().GetComponent<UIButtonsCombat>().AbilityChoseen();
-            //}
-        }
+        UIButton = GetComponent<Button>();
+        OriginalSize = transform.localScale;
+        OnclickDelegate = Click;
+        OnHooverDelegate = Hoovering;
     }
-
 
     public void OnPointerEnter(PointerEventData pointerEventData)
     {
-    //    //if (UIButton.interactable)
-    //        //DescritpionBlock.SetText(Apokemon.gettext(AbilityNum));
+        if (UIButton.interactable)
+        {
+            OnMouseHoovered();
+        }
+
+    }
+
+    public void OnMousePressed()
+    {
+        transform.localScale = OriginalSize * 3 / 4;
+        Debug.Log(AbilityNum);
+        OnclickDelegate(AbilityNum);
+    }
+
+    public void OnMouseHoovered()
+    {
+        Debug.Log(AbilityNum);
+        OnHooverDelegate(AbilityNum);
+    }
+
+    public void DisableForTime(float time)
+    {
+        StartCoroutine(ReturnSize(time));
 
     }
 
 
     IEnumerator ReturnSize(float waitTime)
     {
-        OriginalSize = transform.localScale;
-        transform.localScale = OriginalSize * 3 / 4;
+
         UIButton.interactable = false;
         yield return new WaitForSeconds(waitTime / 2);
         UIButton.interactable = true;

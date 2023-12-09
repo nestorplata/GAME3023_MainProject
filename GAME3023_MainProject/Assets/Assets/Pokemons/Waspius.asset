@@ -18,9 +18,9 @@ MonoBehaviour:
   Defense: 20
   Speed: 20
   animatorController: {fileID: 9100000, guid: 59b32aa3431d0b24fb3df2b6b5ba1177, type: 2}
-  Abilities:
+  AbilitiesBases:
   - {fileID: 11400000, guid: 7d63efc5d5978ee49b0e8127319081ca, type: 2}
-  - {fileID: 11400000, guid: eaeca1448fdfb004f848dad17972868a, type: 2}
   - {fileID: 11400000, guid: 4bd0e8b8e941e3642a5c18dc148b5e0e, type: 2}
+  - {fileID: 11400000, guid: eaeca1448fdfb004f848dad17972868a, type: 2}
   - {fileID: 11400000, guid: ca4bb5e58e2c68e46b6961d61d5043cc, type: 2}
   Description: An Abysmal monster Created only for Destruction

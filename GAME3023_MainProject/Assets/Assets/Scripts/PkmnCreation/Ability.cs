@@ -6,9 +6,9 @@ public class Ability : MonoBehaviour
 {
     public AbilityBase Base { get; set; }
 
-    public Ability( AbilityBase Base)
+    public Ability(AbilityBase @Base)
     {
-        this.Base = Base;
+        this.Base = @Base;
     }
 
 }

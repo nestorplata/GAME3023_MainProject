@@ -5,8 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Abilities", menuName ="Pokemon/Create new Ability")]
 public class AbilityBase : ScriptableObject
 {
-    [SerializeField] string Name;
+    [SerializeField] public string Name;
 
     [TextArea]
-    [SerializeField] string description;
+    [SerializeField] public string description;
 }

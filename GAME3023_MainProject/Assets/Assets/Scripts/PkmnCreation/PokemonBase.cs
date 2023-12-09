@@ -1,13 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEditor.Animations;
-using UnityEditor.Build.Reporting;
 using UnityEngine;
-using UnityEngine.UI;
-using static UnityEditor.VersionControl.Asset;
+
 
 [CreateAssetMenu(fileName = "Pokemons", menuName = "Pokemon/Create new Pokemon")]
 public class PokemonBase : ScriptableObject
@@ -17,8 +11,8 @@ public class PokemonBase : ScriptableObject
     [SerializeField] public int Attack = 1;
     [SerializeField] public int Defense = 1;
     [SerializeField] public int Speed = 1;
-    [SerializeField] AnimatorController animatorController;
-    [SerializeField] List<AbilityBase> Abilities;
+    [SerializeField] public AnimatorController animatorController;
+    [SerializeField] public List<AbilityBase> AbilitiesBases;
 
     [TextArea]
     [SerializeField] string Description;
