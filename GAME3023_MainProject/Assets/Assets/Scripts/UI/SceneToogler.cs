@@ -20,7 +20,6 @@ public class SceneToogler : MonoBehaviour
         button.onClick.AddListener(delegate { Deactivate(); });
     }
 
-    // Update is called once per frame
     public void Deactivate()
     {
         StartCoroutine(ReturnSize(1.0f));

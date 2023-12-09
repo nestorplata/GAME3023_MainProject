@@ -140,7 +140,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 18
-        y: 192
+        y: 540
         width: 456
         height: 159
       alignment: 0
@@ -161,7 +161,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 491
-        y: 190
+        y: 538
         width: 456
         height: 159
       alignment: 0
@@ -182,7 +182,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 18
-        y: 9
+        y: 357
         width: 456
         height: 159
       alignment: 0
@@ -203,7 +203,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 485
-        y: 9
+        y: 357
         width: 456
         height: 159
       alignment: 0
@@ -215,6 +215,90 @@ TextureImporter:
       bones: []
       spriteID: b2953a3ef3758064986c8db591247093
       internalID: 1605724060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Buttons_transparent_4
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 186
+        width: 457
+        height: 159
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6992e93ac6109b848860b6bce1e8c9fa
+      internalID: -1139203132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Buttons_transparent_5
+      rect:
+        serializedVersion: 2
+        x: 486
+        y: 186
+        width: 456
+        height: 159
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43466f0a0d0323e4aaddbdf75462d410
+      internalID: 644791475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Buttons_transparent_6
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 16
+        width: 457
+        height: 159
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bad46dbf01aa6714881a54e939e89c9b
+      internalID: 1391164908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Buttons_transparent_7
+      rect:
+        serializedVersion: 2
+        x: 482
+        y: 18
+        width: 456
+        height: 159
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b105ecbf3fd5f72409d76920deb8265b
+      internalID: -746135471
       vertices: []
       indices: 
       edges: []
@@ -234,6 +318,10 @@ TextureImporter:
       Buttons_transparent_1: -1371426042
       Buttons_transparent_2: 1434155184
       Buttons_transparent_3: 1605724060
+      Buttons_transparent_4: -1139203132
+      Buttons_transparent_5: 644791475
+      Buttons_transparent_6: 1391164908
+      Buttons_transparent_7: -746135471
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -3,21 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TextBoxBehaviur : MonoBehaviour
+public class DescriptionBox : MonoBehaviour
 {
     // Start is called before the first frame update
     int ChoosenAbility;
-    Text Explanation;
-    void Start()
+    Text explanation;
+    public void Setup()
     {
-        Explanation = transform.GetChild(0).GetComponent<Text>();
+        explanation = transform.GetComponentInChildren<Text>();
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 
     public void SetChoosenAbility(int chosen)
     {
@@ -27,6 +24,6 @@ public class TextBoxBehaviur : MonoBehaviour
     }
     public void SetText(string text)
     {
-        Explanation.text = text;
+        explanation.text = text;
     }
 }

@@ -7,98 +7,69 @@ using UnityEngine.UI;
 
 public class UIButtonsCombat : MonoBehaviour, IPointerEnterHandler
 {
-    
+    [SerializeField] DescriptionBox DescritpionBlock;
+
     public bool IsPressed;
     public int AbilityNum;
-    private IEnumerator coroutine;
-    public int random;
+    //public int random;
 
-    CombatManager manager;
-    SelectedPokemon AllyInformation;
-    SelectedPokemon EnemyInformation;
+
     Pokemon Apokemon;
-    Pokemon Epokemon;
 
+    //[SerializeField] AbilityBase AbilityBase;
+    Ability Ability;
 
     Button UIButton;
-    TextBoxBehaviur TextBlock;
 
-    
     Vector3 OriginalSize;
 
     // Start is called before the first frame update
-    void Start()
-    {
-        manager = GetComponentInParent<CombatManager>();
-        TextBlock = GameObject.Find("Text Screen").GetComponent<TextBoxBehaviur>();
-        AllyInformation = GameObject.Find("APokemon").GetComponent<SelectedPokemon>();
-        EnemyInformation = GameObject.Find("EPokemon").GetComponent<SelectedPokemon>();
-        UIButton = GetComponent<Button>();
+    //void Start()
+    //{
+    //    UIButton = GetComponent<Button>();
 
-        //Apokemon = manager.GetPokemon(true);
-        //Epokemon = manager.GetPokemon(false);
+    //    OriginalSize = transform.localScale;
+    //}
 
-        OriginalSize = transform.localScale;
+    //public void OnMousePressed()
+    //{
+    //    if (!IsPressed)
+    //    {
+    //        transform.localScale = OriginalSize * 3 / 4;
+    //        DescritpionBlock.SetChoosenAbility(AbilityNum);
+    //        //DescritpionBlock.SetText(Apokemon.getname() +" used "+Apokemon.getabilities(AbilityNum));
 
-        //Text text = gameObject.transform.GetChild(0).GetComponent<Text>();
-        //text.text = Apokemon.getabilities(AbilityNum);
-        //coroutine = ReturnSize(4.0f);
-        
-        
-        //Checkin no other button has been pressed
-
-    }
-
-    public void OnMousePressed()
-    {
-        if (!IsPressed)
-        {
-            transform.localScale = OriginalSize * 3 / 4;
-            TextBlock.SetChoosenAbility(AbilityNum);
-            TextBlock.SetText(Apokemon.getname() +" used "+Apokemon.getabilities(AbilityNum));
-
-            foreach (Button button in FindObjectsOfType<Button>())
-            {
-                button.GetComponent<Button>().GetComponent<UIButtonsCombat>().AbilityChoseen();
-
-            }
-
-            AllyInformation.OnTurn(AbilityNum);
-
-            
-            EnemyInformation.AfterTurn(AbilityNum);
-
-
-
-        }
-    }
+    //        foreach (Button button in FindObjectsOfType<Button>())
+    //        {
+    //            button.GetComponent<Button>().GetComponent<UIButtonsCombat>().AbilityChoseen();
+    //        }
+    //    }
+    //}
 
 
     public void OnPointerEnter(PointerEventData pointerEventData)
     {
-        if (UIButton.interactable)
-            TextBlock.SetText(Apokemon.gettext(AbilityNum));
+    //    //if (UIButton.interactable)
+    //        //DescritpionBlock.SetText(Apokemon.gettext(AbilityNum));
 
     }
 
-    public void AbilityChoseen(float value=4.0f)
-    {
-        UIButton.interactable = false;
-        //Debug.Log("AnimationChanged to" + AbilityNum);
-        StartCoroutine(ReturnSize(value));
+    //public void AbilityChoseen(float value=4.0f)
+    //{
+    //    UIButton.interactable = false;
+    //    StartCoroutine(ReturnSize(value));
 
-    }
-    // Update is called once per frame
+    //}
 
-    IEnumerator ReturnSize(float waitTime)
-    {
-        yield return new WaitForSeconds(waitTime/2);
-        TextBlock.SetText(Epokemon.getname() + " used " + Epokemon.getabilities(5));
+    //IEnumerator ReturnSize(float waitTime)
+    //{
+    //    yield return new WaitForSeconds(waitTime/2);
+    //    //DescritpionBlock.SetText(Epokemon.getname() + " used " + Epokemon.getabilities(5));
 
-        yield return new WaitForSeconds(waitTime / 2);
-        UIButton.interactable = true;
-        transform.localScale = OriginalSize;
+    //    yield return new WaitForSeconds(waitTime / 2);
+    //    UIButton.interactable = true;
+    //    transform.localScale = OriginalSize;
 
-    }
+    //}
 
 }
