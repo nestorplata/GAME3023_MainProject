@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3d51e9bc756cdc4bba69eec5f5eb6a2, type: 3}
   m_Name: Escape
   m_EditorClassIdentifier: 
-  Name: 
-  description: 
+  Name: Escape
+  description: Escape the Current Encounter

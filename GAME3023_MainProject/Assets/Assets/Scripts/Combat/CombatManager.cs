@@ -22,7 +22,7 @@ public class CombatManager : MonoBehaviour
         PlayerUnit.Setup();
         EnemyUnit.Setup();
         DescriptionBox.Setup();
-
+        //for each
     }
 
 }

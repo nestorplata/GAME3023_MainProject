@@ -23,28 +23,21 @@ public class UIButtonsCombat : MonoBehaviour, IPointerEnterHandler
 
     Vector3 OriginalSize;
 
-    // Start is called before the first frame update
-    //void Start()
-    //{
-    //    UIButton = GetComponent<Button>();
 
-    //    OriginalSize = transform.localScale;
-    //}
 
-    //public void OnMousePressed()
-    //{
-    //    if (!IsPressed)
-    //    {
-    //        transform.localScale = OriginalSize * 3 / 4;
-    //        DescritpionBlock.SetChoosenAbility(AbilityNum);
-    //        //DescritpionBlock.SetText(Apokemon.getname() +" used "+Apokemon.getabilities(AbilityNum));
-
-    //        foreach (Button button in FindObjectsOfType<Button>())
-    //        {
-    //            button.GetComponent<Button>().GetComponent<UIButtonsCombat>().AbilityChoseen();
-    //        }
-    //    }
-    //}
+    public void OnMousePressed()
+    {
+        if (!IsPressed)
+        {
+            StartCoroutine(ReturnSize(4.0f));
+            //DescritpionBlock.SetChoosenAbility(AbilityNum);
+            //DescritpionBlock.SetText(Apokemon.getname() +" used "+Apokemon.getabilities(AbilityNum));
+          //foreach (Button button in FindObjectsOfType<Button>())
+            //{
+            //    button.GetComponent<Button>().GetComponent<UIButtonsCombat>().AbilityChoseen();
+            //}
+        }
+    }
 
 
     public void OnPointerEnter(PointerEventData pointerEventData)
@@ -54,22 +47,16 @@ public class UIButtonsCombat : MonoBehaviour, IPointerEnterHandler
 
     }
 
-    //public void AbilityChoseen(float value=4.0f)
-    //{
-    //    UIButton.interactable = false;
-    //    StartCoroutine(ReturnSize(value));
 
-    //}
+    IEnumerator ReturnSize(float waitTime)
+    {
+        OriginalSize = transform.localScale;
+        transform.localScale = OriginalSize * 3 / 4;
+        UIButton.interactable = false;
+        yield return new WaitForSeconds(waitTime / 2);
+        UIButton.interactable = true;
+        transform.localScale = OriginalSize;
 
-    //IEnumerator ReturnSize(float waitTime)
-    //{
-    //    yield return new WaitForSeconds(waitTime/2);
-    //    //DescritpionBlock.SetText(Epokemon.getname() + " used " + Epokemon.getabilities(5));
-
-    //    yield return new WaitForSeconds(waitTime / 2);
-    //    UIButton.interactable = true;
-    //    transform.localScale = OriginalSize;
-
-    //}
+    }
 
 }
