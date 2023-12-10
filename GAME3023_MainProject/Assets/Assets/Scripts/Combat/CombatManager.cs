@@ -13,9 +13,6 @@ public class CombatManager : MonoBehaviour
     [SerializeField] DescriptionBox DescriptionBox;
     [SerializeField] List<UIButtonsCombat> AbilityButtons;
 
-    delegate void MultiDelegate(float time =4.0f);
-    MultiDelegate AbilityChoosenDelegate;
-
 
     private void Start()
     {
@@ -27,23 +24,33 @@ public class CombatManager : MonoBehaviour
     {
         PlayerUnit.Setup();
         EnemyUnit.Setup();
-        DescriptionBox.Setup("");
+        DescriptionBox.Setup("Combat Started");
 
-        foreach (var Button in AbilityButtons)
+        for (int i = 0;i< AbilityButtons.Count; i++)
         {
-            Button.Setup(AbilityChoosen, SetDescriptionBoxText);
-            AbilityChoosenDelegate += Button.DisableForTime;
+            var Button = AbilityButtons[i];
+            Button.Setup(i, AbilityChoosen, SetDescriptionBoxText);
+            Button.SetName(PlayerUnit.Pokemon.Abilities[i].Base.Name);            
+            PlayerUnit.AbilityChoosenDelegate += Button.DisableForTime;
+
         }
+
     }
 
     public void AbilityChoosen(int Ability)
     {
-        AbilityChoosenDelegate();
+        string message = PlayerUnit.Base.Name + " used " + PlayerUnit.GetAbilityBase(Ability).Name;
+        DescriptionBox.SetText(message);
+        PlayerUnit.PlayAbility(Ability);
+        PlayerUnit.AbilityChoosenDelegate();
+        
     }
+
     public void SetDescriptionBoxText(int Ability)
     {
-        DescriptionBox.SetText(PlayerUnit.GetAbilityDescription(Ability));
+        DescriptionBox.SetText(PlayerUnit.GetAbilityBase(Ability).description);
     }
+
 }
 
 

@@ -1,4 +1,0 @@
-0, sting, waspbite, highground, hivemind, skip
-1, deals little damage and applies poison, increases evaasion chance, increases damage 
-2, hunter, higher damage towards poison enemies
-3, 20, 20, 20, 20

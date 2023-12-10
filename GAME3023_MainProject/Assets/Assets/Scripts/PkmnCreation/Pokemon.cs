@@ -13,11 +13,13 @@ public class Pokemon
 
         Base = @base;
         Abilities = new List<Ability>();
-        foreach (var ability in Base.AbilitiesBases) 
+        foreach (var Base in Base.AbilitiesBases) 
         {
-            Abilities.Add(new Ability(ability));
+            Abilities.Add(new Ability(Base));
         }
         HP = Base.MaxHP;
     }
+
+
 
 }

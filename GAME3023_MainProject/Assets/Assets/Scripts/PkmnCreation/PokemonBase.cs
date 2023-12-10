@@ -11,25 +11,10 @@ public class PokemonBase : ScriptableObject
     [SerializeField] public int Attack = 1;
     [SerializeField] public int Defense = 1;
     [SerializeField] public int Speed = 1;
-    [SerializeField] public AnimatorController animatorController;
+    [SerializeField] public RuntimeAnimatorController animatorController;
     [SerializeField] public List<AbilityBase> AbilitiesBases;
 
     [TextArea]
     [SerializeField] string Description;
 
 }
-
-public enum PokemonAnimation
-{
-    Idle1,
-    Idle2,
-    Idle3,
-    Attack1,
-    Attack2, 
-    Defeat,
-    Pause
-}
-
-
-
-

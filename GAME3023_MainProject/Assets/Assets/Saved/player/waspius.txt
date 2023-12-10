@@ -1,4 +1,0 @@
-0, slash, sting, hivemind, eyexagon, skip
-1, deals damage, applies poison, increases damage, increases evasion 
-2, 0, hunter, higher damage towards poisoned enemies
-3, 20, 20, 20, 20
