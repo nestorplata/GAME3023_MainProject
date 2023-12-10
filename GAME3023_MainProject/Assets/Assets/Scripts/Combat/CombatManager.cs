@@ -19,20 +19,19 @@ public class CombatManager : MonoBehaviour
         SetupBattle();
     }
 
-     
+
     public void SetupBattle()
     {
         PlayerUnit.Setup();
         EnemyUnit.Setup();
         DescriptionBox.Setup("Combat Started");
 
-        for (int i = 0;i< AbilityButtons.Count; i++)
+        for (int i = 0; i < AbilityButtons.Count; i++)
         {
             var Button = AbilityButtons[i];
             Button.Setup(i, AbilityChoosen, SetDescriptionBoxText);
-            Button.SetName(PlayerUnit.Pokemon.Abilities[i].Base.Name);            
+            Button.SetName(PlayerUnit.Pokemon.Abilities[i].Base.Name);
             PlayerUnit.AbilityChoosenDelegate += Button.DisableForTime;
-
         }
 
     }
@@ -43,8 +42,14 @@ public class CombatManager : MonoBehaviour
         DescriptionBox.SetText(message);
         PlayerUnit.PlayAbility(Ability);
         PlayerUnit.AbilityChoosenDelegate();
-        
     }
+
+    public void OnAnimationEnded()
+    {
+        float randomNumber = Random.Range(0, 3);
+
+    }
+
 
     public void SetDescriptionBoxText(int Ability)
     {

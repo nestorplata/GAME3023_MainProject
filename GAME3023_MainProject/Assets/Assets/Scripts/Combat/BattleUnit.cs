@@ -3,23 +3,31 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BattleUnit : MonoBehaviour
 {
     [SerializeField] public PokemonBase Base;
     [SerializeField] UnitUI StatsHUD;
     [SerializeField] bool isPlayerUnit;
+    public Pokemon Pokemon { get; set; }
+
 
     public delegate void MultiDelegate(float time = 4.0f);
     public MultiDelegate AbilityChoosenDelegate;
+
+    public class UnityAnimationEvent : UnityEvent<string> { };
+    public UnityAnimationEvent OnAnimationStart;
+    public UnityAnimationEvent OnAnimationComplete;
+
     Animator animator;
+    AnimationEventDispatcher AnimationEvents;
 
-
-    public Pokemon Pokemon { get; set; }
 
     public void Setup()
     {
         animator = GetComponent<Animator>();
+        AnimationEvents = new AnimationEventDispatcher(animator);
         animator.runtimeAnimatorController = Base.animatorController;
         animator.speed = 0.1f;
 
