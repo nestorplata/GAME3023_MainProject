@@ -5,26 +5,34 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static Unity.Collections.AllocatorManager;
 
 public class UIButtonsCombat : MonoBehaviour, IPointerEnterHandler
 {
-    int AbilityNum;
+
     Button UIButton;
     Text Text;
-
     Vector3 OriginalSize;
 
-    public delegate void GetAbilityDelegate(int Ability);
+    public delegate void GetAbilityDelegate(BattleUnit unit,int Ability);
     GetAbilityDelegate OnclickDelegate;
     GetAbilityDelegate OnHooverDelegate;
 
-    public void Setup(int index, GetAbilityDelegate Click, GetAbilityDelegate Hoovering)
+    BattleUnit AlliedUnit;
+    int AbilityNum;
+
+    public void Setup(BattleUnit unit, int index)
     {
         UIButton = GetComponent<Button>();
         Text = GetComponentInChildren<Text>();
         OriginalSize = transform.localScale;
-
+        AlliedUnit = unit;
         AbilityNum = index;
+
+    }
+
+    public void SetDelegates(GetAbilityDelegate Click, GetAbilityDelegate Hoovering)
+    {
         OnclickDelegate = Click;
         OnHooverDelegate = Hoovering;
     }
@@ -46,22 +54,22 @@ public class UIButtonsCombat : MonoBehaviour, IPointerEnterHandler
     public void OnMousePressed()
     {
         transform.localScale = OriginalSize * 3 / 4;
-        OnclickDelegate(AbilityNum);
+        OnclickDelegate(AlliedUnit, AbilityNum);
     }
 
     public void OnMouseHoovered()
     {
-        OnHooverDelegate(AbilityNum);
+        OnHooverDelegate(AlliedUnit, AbilityNum);
     }
 
-    public void DisableForTime(float time)
+    public void DisableOnClick()
     {
-        StartCoroutine(ReturnSize(time));
+        StartCoroutine(ReturnSize(4.0f));
     }
 
-    public void ToogleInteractibity()
+    public void EnableOnTurnEnd()
     {
-
+        UIButton.interactable = true;
     }
 
 
@@ -70,7 +78,6 @@ public class UIButtonsCombat : MonoBehaviour, IPointerEnterHandler
 
         UIButton.interactable = false;
         yield return new WaitForSeconds(waitTime / 2);
-        UIButton.interactable = true;
         transform.localScale = OriginalSize;
 
     }

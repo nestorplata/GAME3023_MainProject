@@ -1,42 +1,43 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 [System.Serializable]
-public class UnityAnimationEvent : UnityEvent<string> { };
+public class UnityAnimationEvent : UnityEvent<int> { };
 public class AnimationEventDispatcher : MonoBehaviour
 {
-    public UnityAnimationEvent OnAnimationStart;
     public UnityAnimationEvent OnAnimationComplete;
 
-    public AnimationEventDispatcher(Animator animator)
+    public AnimationEventDispatcher(Animator animator, List<Ability> abilities)
     {
-        for (int i = 0; i < animator.runtimeAnimatorController.animationClips.Length; i++)
+        BindAnimationAbilities(animator, abilities);
+    }
+
+    public void BindAnimationAbilities(Animator animator, List<Ability> abilities)
+    {
+        for (int i = 0; i < abilities.Count; i++)
         {
-            AnimationClip clip = animator.runtimeAnimatorController.animationClips[i];
-
-            AnimationEvent animationStartEvent = new AnimationEvent();
-            animationStartEvent.time = 0;
-            animationStartEvent.functionName = "AnimationStartHandler";
-            animationStartEvent.stringParameter = clip.name;
-
-            AnimationEvent animationEndEvent = new AnimationEvent();
-            animationEndEvent.time = clip.length;
-            animationEndEvent.functionName = "AnimationCompleteHandler";
-            animationEndEvent.stringParameter = clip.name;
-
-            clip.AddEvent(animationStartEvent);
-            clip.AddEvent(animationEndEvent);
+            for (int j = 0; j < animator.runtimeAnimatorController.animationClips.Length; j++)
+            {
+                AnimationClip clip = animator.runtimeAnimatorController.animationClips[j];
+                if(animator.GetBehaviours(animator.runtimeAnimatorController).animationClips.)
+                if (!clip.name.Contains("Idle") && clip.name.Contains(abilities[i].Base.Name))
+                {
+                    AnimationEvent animationEndEvent = new AnimationEvent();
+                    animationEndEvent.time = clip.length;
+                    animationEndEvent.functionName = "AnimationCompleteHandler";
+                    animationEndEvent.intParameter = i;
+                    clip.AddEvent(animationEndEvent);
+                    break;
+                }
+            }
         }
     }
 
-    public void AnimationStartHandler(string name)
-    {
-        Debug.Log($"{name} animation start.");
-        OnAnimationStart?.Invoke(name);
-    }
-    public void AnimationCompleteHandler(string name)
+
+    public void AnimationCompleteHandler(int Ability)
     {
         Debug.Log($"{name} animation complete.");
-        OnAnimationComplete?.Invoke(name);
+        OnAnimationComplete?.Invoke(Ability);
     }
 }

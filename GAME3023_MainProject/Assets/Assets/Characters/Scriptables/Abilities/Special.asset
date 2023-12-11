@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Special
   m_EditorClassIdentifier: 
   Name: Special
+  type: 2
   description: Special Pokemon Ability

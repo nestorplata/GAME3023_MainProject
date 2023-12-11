@@ -29,31 +29,41 @@ public class CombatManager : MonoBehaviour
         for (int i = 0; i < AbilityButtons.Count; i++)
         {
             var Button = AbilityButtons[i];
-            Button.Setup(i, AbilityChoosen, SetDescriptionBoxText);
+            Button.Setup(PlayerUnit, i);
             Button.SetName(PlayerUnit.Pokemon.Abilities[i].Base.Name);
-            PlayerUnit.AbilityChoosenDelegate += Button.DisableForTime;
+            Button.SetDelegates(AbilityChoosen, SetDescriptionBoxText);
+            PlayerUnit.AbilityChoosenDelegate += Button.DisableOnClick;
         }
 
+        PlayerUnit.AnimationEvents.OnAnimationComplete.AddListener(OnPlayerAnimationEnded);
+        EnemyUnit.AnimationEvents.OnAnimationComplete.AddListener(OnEnemyAnimationEnded);
     }
 
-    public void AbilityChoosen(int Ability)
+
+
+    public void AbilityChoosen( BattleUnit Unit, int Ability)
     {
-        string message = PlayerUnit.Base.Name + " used " + PlayerUnit.GetAbilityBase(Ability).Name;
+        string message = Unit.Base.Name + " used " + Unit.GetAbilityBase(Ability).Name;
         DescriptionBox.SetText(message);
-        PlayerUnit.PlayAbility(Ability);
-        PlayerUnit.AbilityChoosenDelegate();
+        Unit.PlayAbility(Ability);
+        Unit.AbilityChoosenDelegate();
     }
 
-    public void OnAnimationEnded()
+    public void OnPlayerAnimationEnded( int ability)
     {
-        float randomNumber = Random.Range(0, 3);
+        int  randomNumber = Random.Range(0, 3);
+        AbilityChoosen(EnemyUnit, randomNumber);
 
     }
 
-
-    public void SetDescriptionBoxText(int Ability)
+    private void OnEnemyAnimationEnded(int ability)
     {
-        DescriptionBox.SetText(PlayerUnit.GetAbilityBase(Ability).description);
+
+    }
+
+    public void SetDescriptionBoxText(BattleUnit Unit, int Ability)
+    {
+        DescriptionBox.SetText(Unit.GetAbilityBase(Ability).description);
     }
 
 }

@@ -11,9 +11,10 @@ public class BattleUnit : MonoBehaviour
     [SerializeField] UnitUI StatsHUD;
     [SerializeField] bool isPlayerUnit;
     public Pokemon Pokemon { get; set; }
+    public AnimationEventDispatcher AnimationEvents { get; set; }
 
 
-    public delegate void MultiDelegate(float time = 4.0f);
+    public delegate void MultiDelegate();
     public MultiDelegate AbilityChoosenDelegate;
 
     public class UnityAnimationEvent : UnityEvent<string> { };
@@ -21,13 +22,12 @@ public class BattleUnit : MonoBehaviour
     public UnityAnimationEvent OnAnimationComplete;
 
     Animator animator;
-    AnimationEventDispatcher AnimationEvents;
 
 
     public void Setup()
     {
         animator = GetComponent<Animator>();
-        AnimationEvents = new AnimationEventDispatcher(animator);
+        AnimationEvents = new AnimationEventDispatcher(animator, Pokemon.Abilities);
         animator.runtimeAnimatorController = Base.animatorController;
         animator.speed = 0.1f;
 
@@ -49,7 +49,7 @@ public class BattleUnit : MonoBehaviour
         }
     }
 
-    public string SearchForClip(string name)
+    public string SearchForClip(AbilityType name)
     {
         foreach (var clip in Base.animatorController.animationClips)
         {

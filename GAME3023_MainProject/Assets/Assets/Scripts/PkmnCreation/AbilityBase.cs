@@ -6,10 +6,17 @@ using UnityEngine;
 public class AbilityBase : ScriptableObject
 {
     [SerializeField] public string Name;
+    [SerializeField] AbilityType type;
     [TextArea]
     [SerializeField] public string description;
-
-
-
 }
 
+public enum AbilityType
+{
+    General,
+    Attack,
+    Special,
+    Death,
+    Idle,
+    Hurt,
+}
