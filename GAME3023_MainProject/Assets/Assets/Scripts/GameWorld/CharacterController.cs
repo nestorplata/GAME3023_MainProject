@@ -8,10 +8,14 @@ using System;
 
 public class CharacterController : MonoBehaviour
 {
+    [SerializeField] SceneToogler SceneChanger;
+
     public float moveSpeed;
     public float TileSize;
 
     public LayerMask SolidObjectsLayer;
+    public LayerMask EncounterLayer;
+
 
     private bool isMoving;
     private bool isYDominant;
@@ -19,7 +23,6 @@ public class CharacterController : MonoBehaviour
     private Vector2 input;
     
     private Animator animator;
-    private BoxCollider2D Collider;
 
 
 
@@ -27,7 +30,6 @@ public class CharacterController : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        Collider = GetComponent<BoxCollider2D>();
         using (StreamReader Reader = new StreamReader("Assets\\Assets\\Saved\\Position.txt"))
         {
             Debug.Log(Reader.Peek());
@@ -82,10 +84,15 @@ public class CharacterController : MonoBehaviour
                 targetPos.x += input.x*TileSize;
                 targetPos.y += input.y*TileSize;
 
-                if(IsWalkable(targetPos))
+                if (IsEncounter(targetPos))
+                {
+                    SceneChanger.SaveGame(gameObject);
+                    SceneChanger.MoveToScene(2);
+                }
+
+                if (IsWalkable(targetPos))
                 {
                     StartCoroutine(Move(targetPos));
-
                 }
             }
         }
@@ -110,10 +117,20 @@ public class CharacterController : MonoBehaviour
 
     private bool IsWalkable(Vector3 targetPos)
     {
-        if(Physics2D.OverlapBox(targetPos, new Vector2(0.08f, 0.08f), SolidObjectsLayer) != null)
+        if(Physics2D.OverlapBox(targetPos, new Vector2(0.08f, 0.08f), 0, SolidObjectsLayer) != null)
         {
             return false;
         }
         return true;
+    }
+
+    private bool IsEncounter(Vector3 targetPos)
+    {
+        if (Physics2D.OverlapBox(targetPos, new Vector2(0.08f, 0.08f), 0, EncounterLayer) != null)
+        {
+            return true;
+        }
+        return false;
+
     }
 }

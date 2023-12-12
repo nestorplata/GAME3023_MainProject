@@ -731,7 +731,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7680807072216760884, guid: 67494f5390f33ea438ea7fde429a4a8d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8818395432842037692, guid: 67494f5390f33ea438ea7fde429a4a8d, type: 3}
       propertyPath: m_Pivot.x
@@ -1307,6 +1307,14 @@ PrefabInstance:
     - target: {fileID: 2645360237010138012, guid: 67494f5390f33ea438ea7fde429a4a8d, type: 3}
       propertyPath: m_Name
       value: Options Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 7680807072216760884, guid: 67494f5390f33ea438ea7fde429a4a8d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7680807072216760884, guid: 67494f5390f33ea438ea7fde429a4a8d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: MoveToScene
       objectReference: {fileID: 0}
     - target: {fileID: 8818395432842037692, guid: 67494f5390f33ea438ea7fde429a4a8d, type: 3}
       propertyPath: m_Pivot.x
