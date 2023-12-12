@@ -5,7 +5,7 @@ using UnityEngine;
 public class Ability : MonoBehaviour
 {
     public AbilityBase Base { get; set; }
-    //public delegate void Effect();
+    public string StateName { get; set; }
 
     public Ability(AbilityBase @Base)
     {

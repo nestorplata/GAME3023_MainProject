@@ -53,8 +53,12 @@ public class UIButtonsCombat : MonoBehaviour, IPointerEnterHandler
 
     public void OnMousePressed()
     {
-        transform.localScale = OriginalSize * 3 / 4;
-        OnclickDelegate(AlliedUnit, AbilityNum);
+        if(UIButton.interactable)
+        {
+            OnclickDelegate(AlliedUnit, AbilityNum);
+            transform.localScale = OriginalSize * 3 / 4;
+            StartCoroutine(ReturnSize(4.0f));
+        }
     }
 
     public void OnMouseHoovered()
@@ -62,12 +66,12 @@ public class UIButtonsCombat : MonoBehaviour, IPointerEnterHandler
         OnHooverDelegate(AlliedUnit, AbilityNum);
     }
 
-    public void DisableOnClick()
+    public void DisableButton()
     {
-        StartCoroutine(ReturnSize(4.0f));
+        UIButton.interactable = false;
     }
 
-    public void EnableOnTurnEnd()
+    public void OnEnemyTurnEnd()
     {
         UIButton.interactable = true;
     }
@@ -75,11 +79,8 @@ public class UIButtonsCombat : MonoBehaviour, IPointerEnterHandler
 
     IEnumerator ReturnSize(float waitTime)
     {
-
-        UIButton.interactable = false;
         yield return new WaitForSeconds(waitTime / 2);
         transform.localScale = OriginalSize;
-
     }
 
 }

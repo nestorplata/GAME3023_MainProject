@@ -1,70 +1,64 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+
 
 public class BattleUnit : MonoBehaviour
 {
     [SerializeField] public PokemonBase Base;
     [SerializeField] UnitUI StatsHUD;
     [SerializeField] bool isPlayerUnit;
-    public Pokemon Pokemon { get; set; }
-    public AnimationEventDispatcher AnimationEvents { get; set; }
+    Animator animator;
 
+    public Pokemon Pokemon { get; set; }
 
     public delegate void MultiDelegate();
-    public MultiDelegate AbilityChoosenDelegate;
+    public delegate void SimpleDelegate(string name);
 
-    public class UnityAnimationEvent : UnityEvent<string> { };
-    public UnityAnimationEvent OnAnimationStart;
-    public UnityAnimationEvent OnAnimationComplete;
 
-    Animator animator;
+    public AnimationEventDispatcher AnimationDispatcher { get; set; }
+
+    public SimpleDelegate OnAnimationComplete;
 
 
     public void Setup()
     {
         animator = GetComponent<Animator>();
-        AnimationEvents = new AnimationEventDispatcher(animator, Pokemon.Abilities);
+        Pokemon = new Pokemon(Base);
+
         animator.runtimeAnimatorController = Base.animatorController;
         animator.speed = 0.1f;
 
-        Pokemon = new Pokemon(Base);
+        OnAnimationComplete = AnimationCompleteHandler;
+        AnimationDispatcher = new AnimationEventDispatcher(animator, Pokemon.Abilities);
         StatsHUD.SetData(Pokemon);
     }
 
-    public AbilityBase GetAbilityBase(int Ability)
+    public AbilityBase GetAbilityBase(int index)
     {
-        return Pokemon.Abilities[Ability].Base;
+        return Pokemon.Abilities[index].Base;
     }
 
-    internal void PlayAbility(int ability)
+    internal void PlayAbility(int index)
     {
-        string Clipname = SearchForClip(GetAbilityBase(ability).Name);
-        if (Clipname != "")
-        {
-            animator.Play(Clipname);
-        }
+
+        Debug.Log(isPlayerUnit +","+Pokemon.Abilities[index].StateName);
+        animator.Play(Pokemon.Abilities[index].StateName);
     }
 
-    public string SearchForClip(AbilityType name)
+    public void StopaAbility()
     {
-        foreach (var clip in Base.animatorController.animationClips)
-        {
-            if (clip.name.Contains(name))
-            {
-                return clip.name;
-            }
-        }
-        foreach (var clip in Base.animatorController.animationClips)
-        {
-            if (clip.name.Contains("General"))
-            {
-                return clip.name;
-            }
-        }
-        return "";
+        animator.Play(AnimationDispatcher.IdleAnimation.StateName);
     }
+
+    public void AnimationCompleteHandler(string name)
+    {
+        Debug.Log($"{name} animation complete.");
+        OnAnimationComplete(name);
+    }
+
 }

@@ -1,43 +1,72 @@
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
+using UnityEditor;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.Events;
 
 [System.Serializable]
-public class UnityAnimationEvent : UnityEvent<int> { };
 public class AnimationEventDispatcher : MonoBehaviour
 {
-    public UnityAnimationEvent OnAnimationComplete;
-
+    public Ability IdleAnimation;
     public AnimationEventDispatcher(Animator animator, List<Ability> abilities)
     {
-        BindAnimationAbilities(animator, abilities);
+
+        AnimatorController AnimatorController = animator.runtimeAnimatorController as AnimatorController;
+        AnimationType[] StateTypes = AnimatorController.GetBehaviours<AnimationType>();
+        AnimationClip[] AnimationClips = AnimatorController.animationClips;
+
+        StoreStateNames(StateTypes, AnimationClips);
+
+        foreach (var Ability in abilities)
+        {
+            BindAnimationAbilities(StateTypes, Ability);
+            BindAnimationEvents(AnimationClips, Ability);
+        }
+
+        IdleAnimation = new Ability(new AbilityBase());
+        IdleAnimation.Base.Type = AbilityType.Idle;
+        BindAnimationAbilities(StateTypes, IdleAnimation);
+
     }
 
-    public void BindAnimationAbilities(Animator animator, List<Ability> abilities)
+    public void StoreStateNames(AnimationType[] AnimatorStateTypes, AnimationClip[] animations)
     {
-        for (int i = 0; i < abilities.Count; i++)
+        for (int j = 0; j < AnimatorStateTypes.Length; j++)
         {
-            for (int j = 0; j < animator.runtimeAnimatorController.animationClips.Length; j++)
+            AnimatorStateTypes[j].StateName = animations[j].name;
+        }
+    }
+
+    public void BindAnimationAbilities(AnimationType[] AnimatorStateTypes, Ability ability)
+    {
+        foreach (var Behaviour in AnimatorStateTypes)
+        {
+            if (Behaviour.Type == ability.Base.Type)
             {
-                AnimationClip clip = animator.runtimeAnimatorController.animationClips[j];
-                if(animator.GetBehaviours(animator.runtimeAnimatorController).animationClips.)
-                if (!clip.name.Contains("Idle") && clip.name.Contains(abilities[i].Base.Name))
-                {
-                    AnimationEvent animationEndEvent = new AnimationEvent();
-                    animationEndEvent.time = clip.length;
-                    animationEndEvent.functionName = "AnimationCompleteHandler";
-                    animationEndEvent.intParameter = i;
-                    clip.AddEvent(animationEndEvent);
-                    break;
-                }
+                ability.StateName = Behaviour.StateName;
+                break;
             }
         }
     }
 
-
-    public void AnimationCompleteHandler(int Ability)
+    public void BindAnimationEvents(AnimationClip[] animations, Ability ability)
     {
-        Debug.Log($"{name} animation complete.");
-        OnAnimationComplete?.Invoke(Ability);
+        foreach(var Clip in animations)
+        {
+            if (ability.StateName == Clip.name && Clip.events.Length==0)
+            {               
+                AnimationEvent animationEndEvent = new AnimationEvent();
+                animationEndEvent.time = Clip.length;
+                animationEndEvent.functionName = "AnimationCompleteHandler";
+                animationEndEvent.stringParameter = Clip.name;
+                Clip.AddEvent(animationEndEvent);
+                break;
+            }
+
+        }
     }
+
+    
+
 }

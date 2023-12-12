@@ -6,7 +6,7 @@ using UnityEngine;
 public class AbilityBase : ScriptableObject
 {
     [SerializeField] public string Name;
-    [SerializeField] AbilityType type;
+    [SerializeField] public AbilityType Type;
     [TextArea]
     [SerializeField] public string description;
 }
