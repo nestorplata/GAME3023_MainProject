@@ -28,7 +28,7 @@ public class CharacterController : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         Collider = GetComponent<BoxCollider2D>();
-        using (StreamReader Reader = new StreamReader("Assets\\Saved\\Position.txt"))
+        using (StreamReader Reader = new StreamReader("Assets\\Assets\\Saved\\Position.txt"))
         {
             Debug.Log(Reader.Peek());
             if (Reader.Peek() >= 0)

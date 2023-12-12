@@ -38,11 +38,11 @@ public class SceneToogler : MonoBehaviour
     }
     public void EraseSave ()
     {
-       new StreamWriter("Assets\\Saved\\Position.txt").Close();
+       new StreamWriter("Assets\\Assets\\Saved\\Position.txt").Close();
     }
     public void CheckForSave(int ID)
     {
-        StreamReader Reader = new StreamReader("Assets\\Saved\\Position.txt");
+        StreamReader Reader = new StreamReader("Assets\\Assets\\Saved\\Position.txt");
         if (Reader.Peek() >= 0)
         {
             MoveToScene(ID);
@@ -56,7 +56,7 @@ public class SceneToogler : MonoBehaviour
 
     public void SaveGame(GameObject player)
     {
-        using (StreamWriter writer = new StreamWriter("Assets\\Saved\\Position.txt"))
+        using (StreamWriter writer = new StreamWriter("Assets\\Assets\\Saved\\Position.txt"))
         {
             Vector3 Restant = new Vector3();
 

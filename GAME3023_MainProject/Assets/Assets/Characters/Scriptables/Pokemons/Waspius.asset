@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Waspius
   m_EditorClassIdentifier: 
   Name: Waspius
-  MaxHP: 1
-  Attack: 20
-  Defense: 20
-  Speed: 20
+  MaxHP: 20
+  Attack: 30
+  Defense: 10
+  Speed: 40
   animatorController: {fileID: 9100000, guid: 59b32aa3431d0b24fb3df2b6b5ba1177, type: 2}
   AbilitiesBases:
   - {fileID: 11400000, guid: 7d63efc5d5978ee49b0e8127319081ca, type: 2}
