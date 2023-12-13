@@ -7,6 +7,8 @@ public class AbilityBase : ScriptableObject
 {
     [SerializeField] public string Name;
     [SerializeField] public AbilityType Type;
+    [SerializeField] public FunctionalityType FunctionalityType;
+
     [TextArea]
     [SerializeField] public string description;
 }
@@ -20,3 +22,15 @@ public enum AbilityType
     Idle,
     Hurt,
 }
+
+public enum FunctionalityType
+{
+    Attack,
+    Heal,
+    SpecialAttack,
+    Escape,
+    Struggle
+
+}
+
+

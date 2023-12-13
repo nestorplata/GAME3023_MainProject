@@ -770,7 +770,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7680807072216760884, guid: 67494f5390f33ea438ea7fde429a4a8d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7680807072216760884, guid: 67494f5390f33ea438ea7fde429a4a8d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -778,12 +778,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7680807072216760884, guid: 67494f5390f33ea438ea7fde429a4a8d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7680807072216760884, guid: 67494f5390f33ea438ea7fde429a4a8d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 560670416}
+      objectReference: {fileID: 416757377}
     - target: {fileID: 7680807072216760884, guid: 67494f5390f33ea438ea7fde429a4a8d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
@@ -791,6 +791,10 @@ PrefabInstance:
     - target: {fileID: 7680807072216760884, guid: 67494f5390f33ea438ea7fde429a4a8d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: MoveToScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 7680807072216760884, guid: 67494f5390f33ea438ea7fde429a4a8d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SaveGame
       objectReference: {fileID: 0}
     - target: {fileID: 7680807072216760884, guid: 67494f5390f33ea438ea7fde429a4a8d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
@@ -805,8 +809,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7680807072216760884, guid: 67494f5390f33ea438ea7fde429a4a8d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 322189053}
+    - target: {fileID: 7680807072216760884, guid: 67494f5390f33ea438ea7fde429a4a8d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7680807072216760884, guid: 67494f5390f33ea438ea7fde429a4a8d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8818395432842037692, guid: 67494f5390f33ea438ea7fde429a4a8d, type: 3}
       propertyPath: m_Pivot.x
@@ -910,6 +922,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8818395432842037692, guid: 67494f5390f33ea438ea7fde429a4a8d, type: 3}
   m_PrefabInstance: {fileID: 416757375}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &416757377 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8555037325295032719, guid: 67494f5390f33ea438ea7fde429a4a8d, type: 3}
+  m_PrefabInstance: {fileID: 416757375}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 605c8640a0a639c42bbea6737241555c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1002,17 +1025,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 322189056}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &560670416 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2645360237010138012, guid: 67494f5390f33ea438ea7fde429a4a8d, type: 3}
-  m_PrefabInstance: {fileID: 330917764}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &560670417 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8555037325295032719, guid: 67494f5390f33ea438ea7fde429a4a8d, type: 3}
   m_PrefabInstance: {fileID: 330917764}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 560670416}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 605c8640a0a639c42bbea6737241555c, type: 3}

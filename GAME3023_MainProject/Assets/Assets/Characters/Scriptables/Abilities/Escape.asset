@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Escape
   m_EditorClassIdentifier: 
   Name: Escape
-  type: 0
+  Type: 0
+  FunctionalityType: 3
   description: Escape the Current Encounter

@@ -1,10 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.IO;
-using System.Linq;
-using JetBrains.Annotations;
-using UnityEngine.Events;
+
 
 
 public class CombatManager : MonoBehaviour
@@ -12,14 +9,15 @@ public class CombatManager : MonoBehaviour
     [SerializeField] BattleUnit PlayerUnit;
     [SerializeField] BattleUnit EnemyUnit;
     [SerializeField] DescriptionBox DescriptionBox;
+    [SerializeField] SceneToogler SceneToogler;
     [SerializeField] List<UIButtonsCombat> AbilityButtons;
 
+    private AbilityFunctionality AbilityFunctionality;
 
     private void Start()
     {
         SetupBattle();
     }
-
 
     public void SetupBattle()
     {
@@ -27,19 +25,23 @@ public class CombatManager : MonoBehaviour
         EnemyUnit.Setup();
         DescriptionBox.Setup("Combat Started");
 
+        AbilityFunctionality = new AbilityFunctionality(SceneToogler);
+        AbilityFunctionality.AssignFuntionalities(PlayerUnit);
+        AbilityFunctionality.AssignFuntionalities(EnemyUnit);
+
         for (int i = 0; i < AbilityButtons.Count; i++)
         {
             var Button = AbilityButtons[i];
             Button.Setup(PlayerUnit, i);
             Button.SetName(PlayerUnit.Pokemon.Abilities[i].Base.Name);
-            Button.SetDelegates(playerTurn, SetDescriptionBoxText);
+            Button.SetDelegates(OnPlayerAbilityChosen, DescriptionBox.SetAbilityText);
         }
         PlayerUnit.OnAnimationComplete=OnPlayerAnimationEnded;
-        EnemyUnit.OnAnimationComplete=OnEnemyAnimationEnded;
+        EnemyUnit.OnAnimationComplete= OnEnemyAnimationEnded;
 
     }
 
-    public void playerTurn(BattleUnit Unit, int Ability)
+    public void OnPlayerAbilityChosen(BattleUnit Unit, int Ability)
     {
         foreach (var button in AbilityButtons)
         {
@@ -55,26 +57,82 @@ public class CombatManager : MonoBehaviour
         Unit.PlayAbility(Ability);
     }
 
+
     public void OnPlayerAnimationEnded(string name)
     {
-        PlayerUnit.StopaAbility();
-        int randomNumber = Random.Range(0, 3);
-        AbilityChoosen(EnemyUnit, randomNumber);
+        OnAnimationEnded(PlayerUnit, EnemyUnit, name);
+        StartCoroutine(AllowEnemyTurn(2.0f));
     }
 
     public void OnEnemyAnimationEnded(string name)
     {
-        EnemyUnit.StopaAbility();
-        foreach (var button in AbilityButtons)
+        OnAnimationEnded(EnemyUnit, PlayerUnit, name);
+        StartCoroutine(AllowPlayerTurn(2.0f));
+    }
+
+    IEnumerator AllowEnemyTurn(float time)
+    {
+
+        yield return new WaitForSeconds(time);
+        if (!CheckForEnd())
         {
-            button.OnEnemyTurnEnd();
+            int randomNumber = Random.Range(0, 1);
+            AbilityChoosen(EnemyUnit, randomNumber);
         }
     }
 
-    public void SetDescriptionBoxText(BattleUnit Unit, int Ability)
+    IEnumerator AllowPlayerTurn(float time)
     {
-        DescriptionBox.SetText(Unit.GetAbilityBase(Ability).description);
+        yield return new WaitForSeconds(time);
+
+        if (!CheckForEnd())
+        {
+            foreach (var button in AbilityButtons)
+            {
+                button.EnableButton();
+            }
+        }
     }
+
+    public void OnAnimationEnded(BattleUnit Actor, BattleUnit Reactor, string Name)
+    {
+        Actor.StopaAbility();
+        bool isSuccessfull = Actor.GetAbility(Name).Functionality(Actor, Reactor);
+        string message = Actor.GetAbility(Name).Base.Name;
+
+        if (isSuccessfull)
+        {
+            DescriptionBox.SetText("Succesfull " + message);
+        }
+        else
+        {
+            DescriptionBox.SetText("Failed " + message);
+        }
+
+        Actor.UpdateHPStats();
+        Reactor.UpdateHPStats();
+
+    }
+
+    public bool CheckForEnd()
+    {
+        if (PlayerUnit.Pokemon.HP <= 0)
+        {
+            SceneToogler.MoveToScene(5);
+            PlayerUnit.PlayDead();
+            return true;
+        }
+        else if (EnemyUnit.Pokemon.HP <= 0)
+        {
+            SceneToogler.CheckForSave(1);
+            EnemyUnit.PlayDead();
+            return true;
+        }
+        return false;
+    }
+
+
+
 
 }
 

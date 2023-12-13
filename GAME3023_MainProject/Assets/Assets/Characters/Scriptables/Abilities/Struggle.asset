@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: Struggle
   m_EditorClassIdentifier: 
   Name: Struggle
+  Type: 5
+  FunctionalityType: 4
   description: Random Chance to win encounter

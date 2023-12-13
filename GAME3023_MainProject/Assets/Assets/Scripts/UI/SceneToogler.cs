@@ -1,11 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
-using UnityEditor;
 using System.IO;
 using UnityEngine.UI;
-using UnityEditor.SearchService;
 
 public class SceneToogler : MonoBehaviour
 {
@@ -33,8 +30,6 @@ public class SceneToogler : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
-        EditorApplication.ExitPlaymode();
-
     }
     public void EraseSave ()
     {
@@ -74,8 +69,6 @@ public class SceneToogler : MonoBehaviour
 
             writer.WriteLine(player.transform.position-Restant);
         }
-           
-
     }
 
     IEnumerator ReturnSize(float time)

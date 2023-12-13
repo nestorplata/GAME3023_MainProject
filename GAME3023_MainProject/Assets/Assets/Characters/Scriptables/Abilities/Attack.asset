@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Attack
   Type: 1
+  FunctionalityType: 0
   description: Attack the oponent

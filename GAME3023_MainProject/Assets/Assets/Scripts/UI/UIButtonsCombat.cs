@@ -71,7 +71,7 @@ public class UIButtonsCombat : MonoBehaviour, IPointerEnterHandler
         UIButton.interactable = false;
     }
 
-    public void OnEnemyTurnEnd()
+    public void EnableButton()
     {
         UIButton.interactable = true;
     }

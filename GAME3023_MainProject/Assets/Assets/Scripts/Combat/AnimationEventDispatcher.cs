@@ -1,20 +1,15 @@
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
-using UnityEditor;
-using UnityEditor.Animations;
 using UnityEngine;
-using UnityEngine.Events;
+
+
 
 [System.Serializable]
 public class AnimationEventDispatcher : MonoBehaviour
 {
     public Ability IdleAnimation;
-    public AnimationEventDispatcher(Animator animator, List<Ability> abilities)
+    public Ability DeathAnimation;
+    public AnimationEventDispatcher(AnimationType[] StateTypes, AnimationClip[] AnimationClips, List<Ability> abilities)
     {
-
-        AnimatorController AnimatorController = animator.runtimeAnimatorController as AnimatorController;
-        AnimationType[] StateTypes = AnimatorController.GetBehaviours<AnimationType>();
-        AnimationClip[] AnimationClips = AnimatorController.animationClips;
 
         StoreStateNames(StateTypes, AnimationClips);
 
@@ -27,6 +22,11 @@ public class AnimationEventDispatcher : MonoBehaviour
         IdleAnimation = new Ability(new AbilityBase());
         IdleAnimation.Base.Type = AbilityType.Idle;
         BindAnimationAbilities(StateTypes, IdleAnimation);
+
+        DeathAnimation = new Ability(new AbilityBase());
+        DeathAnimation.Base.Type = AbilityType.Death;
+        BindAnimationAbilities(StateTypes, DeathAnimation);
+
 
     }
 
@@ -59,7 +59,7 @@ public class AnimationEventDispatcher : MonoBehaviour
                 AnimationEvent animationEndEvent = new AnimationEvent();
                 animationEndEvent.time = Clip.length;
                 animationEndEvent.functionName = "AnimationCompleteHandler";
-                animationEndEvent.stringParameter = Clip.name;
+                animationEndEvent.stringParameter = ability.Base.Name;
                 Clip.AddEvent(animationEndEvent);
                 break;
             }

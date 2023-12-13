@@ -16,4 +16,8 @@ public class DescriptionBox : MonoBehaviour
     {
         explanation.text = text;
     }
+    public void SetAbilityText(BattleUnit Unit, int Ability)
+    {
+        SetText(Unit.GetAbilityBase(Ability).description);
+    }
 }
